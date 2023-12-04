@@ -66,16 +66,32 @@ usuarios.
 
 ## Instrucciones de Configuración y Ejecución:
 1. Clona el repositorio: git clone https://github.com/gtoffa/blog_grupo6
-2. Activa el entorno virtual
-3. Instala las dependencias: pip install -r requirements.txt
-4. Realiza las migraciones: python manage.py migrate
-5. Crea un superusuario: python manage.py createsuperuser
+2. Configura el entorno virtual
+```bash
+   # macOS/Linux
+   # Es posible que necesites ejecutar  `sudo apt-get install python3-venv` en sistemas operativos basados ​​en Debian
+   python3 -m venv .venv
 
->**Nota**: Antes de ejecutar los comandos de migración, asegúrate de configurar la base de datos en el archivo blog/settings/local.py. Usa la version MySQL 8.0 y asegurate de tener la base de datos blog_grupo6, si no lo tienes puedes agregar con el siguiente comando:
+   # Windows
+   # También puedes usar  `py -3 -m venv .venv`
+   python -m venv .venv
+```
+3. Activa el entorno virtual:
+```bash
+   # macOS/Linux
+   source .venv/bin/activate
 
+   # Windows
+   .venv\Scripts\activate
+```
+4. Instala las dependencias: pip install -r requirements.txt en linux si tirra un error
+5. Crea la base de datos blog_grupo6 en Mysql 8.0
 ```sql
 CREATE SCHEMA `blog_grupo6`;
 ```
+6. Configura la base de datos en el archivo blog/settings/local.py
+7. Realiza las migraciones: python manage.py migrate
+8. Crea un superusuario: python manage.py createsuperuser
 
 
 ## Ejecución:
