@@ -84,7 +84,7 @@ usuarios.
    # Windows
    .venv\Scripts\activate
 ```
-4. Instala las dependencias: pip install -r requirements.txt en linux si tirra un error
+4. Instala las dependencias: pip install -r requirements.txt
 5. Crea la base de datos blog_grupo6 en Mysql 8.0
 ```sql
 CREATE SCHEMA `blog_grupo6`;
