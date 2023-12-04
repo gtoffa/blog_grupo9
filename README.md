@@ -97,6 +97,6 @@ CREATE SCHEMA `blog_grupo6`;
 ## Ejecución:
 1. Ejecuta el servidor local:
 ```bash
-  python blog/manage.py runserver 
+  python manage.py runserver 
 ```
 2. Accede a la aplicación web desde tu navegador: http://localhost:8000/
