@@ -10,7 +10,7 @@ ALLOWED_HOSTS = []
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blog_grupo6',
+        'NAME': 'blog_grupo7',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': '127.0.0.1',
