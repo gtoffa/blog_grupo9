@@ -1,0 +1,77 @@
+# Archivos y directorios generados por Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Carpeta virtualenv
+.venv/
+
+# Carpeta de configuración de VSCode
+.vscode/
+
+# Archivo de configuración local de Django
+*.log
+
+# Archivos de configuración de entorno
+.env
+
+# Archivos de bases de datos
+*.sqlite3
+db.sqlite3
+
+# Archivos de caché y sesiones de Django
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+
+# Archivos de migraciones de Django
+/migrations/
+
+# Archivos de configuración local
+settings_local.py
+
+# Archivos de registro
+logs/
+*.log
+
+# Archivos de respaldo y temporales
+*.bak
+*.swp
+*~
+
+# Archivos de prueba y cobertura
+.coverage
+htmlcov/
+
+# Carpeta de compilación
+__pycache__/
+
+# Archivos generados por IDEs y editores
+*.sublime-workspace
+*.sublime-project
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+
+# Archivos de configuración de PyCharm
+.idea/
+*.iml
+*.iws
+
+# Archivos de configuración de Visual Studio
+.vs/
+*.suo
+*.user
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Carpetas y archivos de prueba
+node_modules/
+*.log
