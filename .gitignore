@@ -7,8 +7,7 @@ __pycache__/
 # Carpeta virtualenv
 .venv/
 
-# Carpeta de configuración de VSCode
-.vscode/
+
 
 # Archivo de configuración local de Django
 *.log
