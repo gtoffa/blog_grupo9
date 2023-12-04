@@ -65,7 +65,7 @@ usuarios.
 
 
 ## Instrucciones de Configuración y Ejecución:
-1. Clona el repositorio: git clone https://github.com/gtoffa/blog_grupo6
+1. Clona el repositorio: git clone https://github.com/gtoffa/blog_grupo7
 2. Configura el entorno virtual
 ```bash
    # macOS/Linux
@@ -85,9 +85,9 @@ usuarios.
    .venv\Scripts\activate
 ```
 4. Instala las dependencias: pip install -r requirements.txt
-5. Crea la base de datos blog_grupo6 en Mysql 8.0
+5. Crea la base de datos blog_grupo7 en Mysql 8.0
 ```sql
-CREATE SCHEMA `blog_grupo6`;
+CREATE SCHEMA `blog_grupo7`;
 ```
 6. Configura la base de datos en el archivo blog/settings/local.py
 7. Realiza las migraciones: python manage.py migrate
@@ -97,6 +97,6 @@ CREATE SCHEMA `blog_grupo6`;
 ## Ejecución:
 1. Ejecuta el servidor local:
 ```bash
-  python blog/manage.py runserver 
+  python manage.py runserver 
 ```
 2. Accede a la aplicación web desde tu navegador: http://localhost:8000/
