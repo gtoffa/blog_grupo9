@@ -85,9 +85,9 @@ usuarios.
    .venv\Scripts\activate
 ```
 4. Instala las dependencias: pip install -r requirements.txt
-5. Crea la base de datos blog_grupo7 en Mysql 8.0
+5. Crea la base de datos blog_grupo9 en Mysql 8.0
 ```sql
-CREATE SCHEMA `blog_grupo7`;
+CREATE SCHEMA `blog_grupo9`;
 ```
 6. Configura la base de datos en el archivo blog/settings/local.py
 7. Realiza las migraciones: python manage.py migrate
