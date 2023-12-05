@@ -65,7 +65,7 @@ usuarios.
 
 
 ## Instrucciones de Configuración y Ejecución:
-1. Clona el repositorio: git clone https://github.com/gtoffa/blog_grupo7
+1. Clona el repositorio: git clone https://github.com/gtoffa/blog_grupo9
 2. Configura el entorno virtual
 ```bash
    # macOS/Linux
