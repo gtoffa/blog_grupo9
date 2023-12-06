@@ -1,18 +1,67 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-    <title>Mi Blog {% block titulo %}{% endblock titulo %}</title>
-</head>
-<body class="contenedor">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="author" content="Themes Industry" />
+    <!-- description -->
+    <meta
+      name="description"
+      content="MegaOne is a highly creative, modern, visually stunning and Bootstrap responsive multipurpose agency and HTML5 template with 14 ready home page demos."
+    />
+    <!-- keywords -->
+    <meta
+      name="keywords"
+      content="creative, modern, clean, bootstrap responsive, html5, css3, portfolio, blog, agency, templates, multipurpose, one page, corporate, start-up, studio, branding, designer, freelancer, carousel, parallax, photography, personal, masonry, grid, faq"
+    />
+    <!-- Page Title -->
+    <title>Blog | MegaOne HTML5 Template</title>
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/favicon.ico'%}" />
+    <!-- Bundle -->
+    <link rel="stylesheet" href="{% static 'vendor/css/bundle.min.css'%}" />
+    <!-- Plugin Css -->
+    <link rel="stylesheet" href="{% static 'vendor/css/cubeportfolio.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/animate.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/jquery.fancybox.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/line-awesome.min.css'%}" />
+    <!-- Style Sheet -->
+    <link rel="stylesheet" href="{% static 'vendor/css/owl.carousel.min.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/style.css'%}" />
+    <link rel="stylesheet" href="{% static 'css/guille.css'%}" />
+  </head>
+
+  <body data-spy="scroll" data-target=".navbar" data-offset="150">
+    <!--  PRELOADER  -->
+    <div class="loader-area">
+      <div class="loader">
+        <div class="one"></div>
+        <div class="two"></div>
+        <div class="three"></div>
+      </div>
+    </div>
+
     {% block contenido %}
 
     {% endblock contenido %}
-    <a href="{% url 'nosotros' %}">IR A NOSOTROS</a>
-    <a href="{% url 'home' %}">VOLVER AL INICIO</a>
-    <a href="{% url 'noticias:listar' %}">NOTICIAS</a>
-</body>
+    <!-- JavaScript -->
+    <script src="{% static 'vendor/js/bundle.min.js'%}"></script>
+
+    <!-- Plugin Js -->
+    <script src="{% static 'vendor/js/owl.carousel.min.js'%}"></script>
+    <script src="{% static 'vendor/js/jquery.cubeportfolio.min.js'%}"></script>
+    <!-- custom script -->
+    <script src="{% static 'js/jquery.fancybox.js'%}"></script>
+    <script src="{% static 'js/jquery.fancybox.min.js'%}"></script>
+    <script src="{% static 'js/mediaelement-and-player.min.js'%}"></script>
+    <script src="{% static 'js/wow.min.js'%}"></script>
+    <script src="{% static 'vendor/js/parallaxie.min.js'%}"></script>
+    <script src="{% static 'js/script.js'%}"></script>
+  </body>
 </html>
