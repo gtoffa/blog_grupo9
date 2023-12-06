@@ -1,0 +1,6 @@
+.truncate {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* Muestra solo 3 líneas */
+    -webkit-box-orient: vertical;
+  }

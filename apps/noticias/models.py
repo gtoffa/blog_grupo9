@@ -9,7 +9,7 @@ class Categoria(models.Model):
     
 
 class Noticia(models.Model):
-    titulo = models.CharField(max_length=50) # = VARCHAR | max_length longitud max
+    titulo = models.CharField(max_length=255) # = VARCHAR | max_length longitud max
     contenido = models.TextField()
     #imagen requiere la libreria pillow
     imagenes = models.ImageField(upload_to='noticias')
