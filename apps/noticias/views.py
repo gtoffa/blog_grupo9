@@ -46,3 +46,7 @@ def DetalleNoticia(request, pk):
     contexto['noticias'] = n
     
     return render (request, 'noticias/detalle.html', contexto)
+
+def Ultmias10Noticias(request):
+    contexto = {}
+    n = Noticia.objects. all().order_by('-fecha_publicacion')[:10]

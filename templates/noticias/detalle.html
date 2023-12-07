@@ -1,15 +1,349 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block titulo %}Noticias{% endblock titulo %}
+{% extends 'base.html' %} 
+{% load static %} 
 {% block contenido %}
-    <h2>Mi noticia detallada</h2>
-    <div class="noti">
-        <img src="{{noticias.imagenes.url}}" width="30%">
-        <h3>{{noticias.titulo}}</h3>
-        <p>{{noticias.contenido}}</p>
-        <p>{{noticias.fecha_publicacion}}</p>
-        <p>{{noticias.categoria_noticia}}</p>
-        <br>
-        <a href="{% url 'noticias:listar' %}">VOLVER</a>
+{% include "navbar.html" %} 
+<div id="page_content">
+  <!--HEADER IMAGE-->
+  <section id="bg-blog-detail-img" class="bg-blog-detail-img">
+    <div class="overlay"></div>
+  </section>
+
+  <section id="search">
+    <div class="container">
+      <div class="row pt-lg-5">
+        <div class="col-sm-12 col-ms-8 col-lg-8">
+          <div class="text_minimal pt-0">
+            
+
+            <h1 class="pt-3 font-weight-bold blog_detail-heading text-black">
+                {{noticias.titulo}}
+            </h1>
+            <p class="sub-heading pt-0 text-grey">
+                {{noticias.contenido}}
+            </p>
+            
+
+          <div class="blogN_images">
+            <div class="row">
+              <div class="col-sm-12 col-md-6 col-lg-6 pr-md-1 pr-lg-1">
+                <img class="image_blogS" src="img/blog-detail2.jpg" alt="" />
+              </div>
+              <div
+                class="col-sm-12 col-md-6 col-lg-6 pl-md-1 pl-lg-1 padding_blog-img"
+              >
+                <img class="image_blogS" src="img/blog-detail1.jpg" alt="" />
+              </div>
+              <div class="col-12 pt-2">
+                <img class="image_blogL" src="img/blog-detail3.jpg" alt="" />
+              </div>
+            </div>
+          </div>
+
+          <p class="sub-heading pt-3">
+            Nam ut rutrum ex, venenatis sollicitudin urna. Aliquam erat
+            volutpat. Integer eu ipsum sem. Ut lacus vestibulum maximus
+            suscipit. Quisque vitae nibh iaculis
+          </p>
+          <p class="sub-heading pt-2">
+            Nam ut rutrum ex, venenatis sollicitudin urna. Aliquam erat
+            volutpat. Integer eu ipsum sem. Ut lacus vestibulum maximus
+            suscipit. Quisque vitae nibh iaculis. Nam ut rutrum ex, venenatis
+            sollicitudin urna. Aliquam erat volutpat. Integer eu ipsum sem. Ut
+            bibendum suscipit.
+          </p>
+          <div class="horizontal-line mt-5"></div>
+
+          <div class="written">
+            <div class="written_outerbox mt-5 display">
+              <img class="written_img" src="img/comment_img.png" alt="" />
+              <div class="written_text">
+                <p class="date text-black">WRITTEN BY</p>
+                <h1 class="main_written text-black">Enna Janes</h1>
+                <p class="sub-heading mt-0">
+                  Nam ut rutrum ex, venenatis sollicitudin urna. Aliquam erat
+                  volutpat. Integer eu ipsum sem. Ut lacus vestibulum maximus
+                  suscipit.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="comment">
+            <div class="comment_write">
+              <div class="icon_comment">
+                <i class="far fa-user user_icon"></i>
+
+                <div class="icon_text">
+                  <h1 class="main_written font">Mark Edison</h1>
+                  <p class="date margin_days text-black">20 days ago</p>
+                </div>
+              </div>
+              <p class="sub-heading mt-1">
+                Nam ut rutrum ex, venenatis sollicitudin urna. Aliquam erat
+                volutpat. Integer eu ipsum sem. Ut lacus vestibulum maximus
+                suscipit.
+              </p>
+            </div>
+
+            <h1 class="comment_text text-black mt-6 mb-5">Write a comment</h1>
+            <form>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <input
+                      class="form-control"
+                      type="text"
+                      placeholder="Name"
+                      required
+                      id="Name"
+                      name="Name"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <input
+                      class="form-control"
+                      type="email"
+                      placeholder="Email"
+                      required
+                      id="email"
+                      name="email"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group">
+                    <span class="message-error error"></span>
+                    <textarea
+                      class="form-control"
+                      rows="5"
+                      required
+                      id="comment"
+                      placeholder="Comment"
+                    ></textarea>
+                  </div>
+                  <button
+                    type="submit"
+                    class="btn btn-large btn-primary padding_button w-100"
+                    id="submit_btn"
+                  >
+                    SUBMIT REQUEST
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-4 order-2 order-md-1 margin_small">
+          <div class="search_outerbox">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search for..."
+              />
+              <span class="input-group-btn">
+                <button class="btn btn-search" type="button">
+                  <i class="fa fa-search fa-fw"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+
+          <section id="topics">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 pr-0 pl-0">
+                  <div class="topic_outerbox mt-4">
+                    <h2>Topics</h2>
+                    <div class="inner-box">
+                      <ul class="sub-heading">
+                        <li>
+                          <a href="#">Art</a>
+                          <span class="dots">.................</span> 4
+                        </li>
+                        <li>
+                          <a href="#">Fashion</a>
+                          <span class="dots pr-1">..............</span>5
+                        </li>
+                        <li>
+                          <a href="#">Corona</a
+                          ><span class="dots pr-1">...............</span>1
+                        </li>
+                        <li>
+                          <a href="#">Sports</a>
+                          <span class="dots">...............</span> 8
+                        </li>
+                        <li>
+                          <a href="#">Travel</a>
+                          <span class="dots">................</span>6
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="popular_post">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 p-0">
+                  <div class="outer_popular mt-4">
+                    <h2 class="text-black">Popular Post</h2>
+                    <div class="outer mt-4 display">
+                      <div class="popular_image">
+                        <a href="detail-blog.html"
+                          ><img src="img/post1.jpg" alt="popular image"
+                        /></a>
+                      </div>
+                      <div class="text_post">
+                        <p class="main">Minimal Post...</p>
+                        <p class="date">August 13, 2019 by</p>
+                        <span>Mark Edison</span>
+                      </div>
+                    </div>
+
+                    <div class="outer pt-lg-3 display">
+                      <div class="popular_image">
+                        <a href="detail-blog.html"
+                          ><img src="img/post2.jpg" alt="audio image"
+                        /></a>
+                      </div>
+                      <div class="text_post">
+                        <p class="main">Standard Post....</p>
+                        <p class="date">October 22, 2019 by</p>
+                        <span>Mark Edison</span>
+                      </div>
+                    </div>
+
+                    <div class="outer pt-lg-3 display">
+                      <div class="popular_image">
+                        <a href="detail-blog.html"
+                          ><img src="img/post3.jpg" alt="standard image"
+                        /></a>
+                      </div>
+                      <div class="text_post">
+                        <p class="main">Standard Post...</p>
+                        <p class="date">October 30, 2019 by</p>
+                        <span>Mark Edison</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="tags">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 pr-0 pl-0">
+                  <div class="outer_tag mt-4">
+                    <h2 class="main_tag">Tags</h2>
+                    <div class="inner_tag">
+                      <div class="tag_text">
+                        <span><a href="">ART</a></span>
+                        <span><a href="">FASHION</a></span>
+                        <span><a href="">SPORTS</a></span>
+                        <span><a href="">TRAVEL</a></span>
+                        <span><a href="">CORONA</a></span>
+                        <span><a href="">PHOTOGRAPHY</a></span>
+                        <span><a href="">CLOTHING</a></span>
+                        <span><a href="">TRENDS</a></span>
+                        <span><a href="">EVENTS</a></span>
+                        <span><a href="">BLOGGERS</a></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="archieve">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 pr-0 pl-0">
+                  <div class="topic_outerbox mt-4">
+                    <h2>Archives</h2>
+                    <div class="inner-box1">
+                      <ul class="sub-heading">
+                        <li>
+                          <a href="#">May 2016</a>
+                          <span class="dots">..............</span>1
+                        </li>
+                        <li>
+                          <a href="#">July 2015</a>
+                          <span class="dots">..............</span>3
+                        </li>
+                        <li>
+                          <a href="#">Dec 2017</a>
+                          <span class="dots">..............</span>1
+                        </li>
+                        <li>
+                          <a href="#">Oct 2019</a>
+                          <span class="dots">..............</span>6
+                        </li>
+                        <li>
+                          <a href="#">Sep 2018</a>
+                          <span class="dots">..............</span>8
+                        </li>
+                        <li>
+                          <a href="#">Feb 2020</a>
+                          <span class="dots">..............</span>1
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="sale_image">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 pr-0 pl-0 pt-4">
+                  <img
+                    class="sale_img"
+                    src="img/sale-img.jpg"
+                    alt="advertisment image"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <!--  START FOOTER SECTION  -->
+  <section id="footer" class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <ul class="footer_ul">
+            <li class="footer_list"><i class="lab la-facebook-f"></i></li>
+            <li class="footer_list"><i class="lab la-twitter"></i></li>
+            <li class="footer_list"><i class="lab la-google-plus"></i></li>
+            <li class="footer_list"><i class="lab la-linkedin-in"></i></li>
+            <li class="footer_list"><i class="lab la-instagram"></i></li>
+            <li class="footer_list"><i class="las la-envelope"></i></li>
+          </ul>
+          <p class="info footer_text">
+            <i class="far fa-copyright"></i>2023 MegaOne. Made with love by
+            themesindustry
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 {% endblock contenido %}
