@@ -25,7 +25,9 @@ urlpatterns = [
     path('', include('apps.home.urls')),
     path('nosotros/', views.Nosotros, name='nosotros'),
     path('noticias/', include('apps.noticias.urls')),
+    path('contacto/', include('apps.contacto.urls')),
     #parametro 1: es el texto de la url
     #parametro 2: la vista que se va a ejecutar
     #parametro 3: el nombre de la url
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
