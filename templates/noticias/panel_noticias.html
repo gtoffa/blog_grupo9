@@ -1,0 +1,136 @@
+{% load static %}
+<div class="col-12 col-lg-4 order-2 order-md-1 margin_small">
+  <div class="search_outerbox">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for..." />
+      <span class="input-group-btn">
+        <button class="btn btn-search" type="button">
+          <i class="fa fa-search fa-fw"></i>
+        </button>
+      </span>
+    </div>
+  </div>
+  <section id="popular_post">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 p-0">
+          <div class="outer_popular mt-4">
+            <h2 class="text-black">Popular Post</h2>
+            <div class="outer mt-4 display">
+              <div class="popular_image">
+                <a href="detail-blog.html"
+                  ><img src="img/post1.jpg" alt="popular image"
+                /></a>
+              </div>
+              <div class="text_post">
+                <p class="main">Minimal Post...</p>
+                <p class="date">August 13, 2019 by</p>
+                <span>Mark Edison</span>
+              </div>
+            </div>
+
+            <div class="outer pt-lg-3 display">
+              <div class="popular_image">
+                <a href="detail-blog.html"
+                  ><img src="img/post2.jpg" alt="audio image"
+                /></a>
+              </div>
+              <div class="text_post">
+                <p class="main">Standard Post....</p>
+                <p class="date">October 22, 2019 by</p>
+                <span>Mark Edison</span>
+              </div>
+            </div>
+
+            <div class="outer pt-lg-3 display">
+              <div class="popular_image">
+                <a href="detail-blog.html"
+                  ><img src="img/post3.jpg" alt="standard image"
+                /></a>
+              </div>
+              <div class="text_post">
+                <p class="main">Standard Post...</p>
+                <p class="date">October 30, 2019 by</p>
+                <span>Mark Edison</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="tags">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 pr-0 pl-0">
+          <div class="outer_tag mt-4">
+            <h2 class="main_tag">Categorias</h2>
+            <div class="inner_tag">
+              <div class="tag_text">
+                {% for cat in categorias %}
+                <span>
+                  <a href="?id={{cat.pk}}">{{cat.nombre}}</a>
+                </span>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="archieve">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 pr-0 pl-0">
+          <div class="topic_outerbox mt-4">
+            <h2>Archives</h2>
+            <div class="inner-box1">
+              <ul class="sub-heading">
+                <li>
+                  <a href="#">May 2016</a>
+                  <span class="dots">..............</span>1
+                </li>
+                <li>
+                  <a href="#">July 2015</a>
+                  <span class="dots">..............</span>3
+                </li>
+                <li>
+                  <a href="#">Dec 2017</a>
+                  <span class="dots">..............</span>1
+                </li>
+                <li>
+                  <a href="#">Oct 2019</a>
+                  <span class="dots">..............</span>6
+                </li>
+                <li>
+                  <a href="#">Sep 2018</a>
+                  <span class="dots">..............</span>8
+                </li>
+                <li>
+                  <a href="#">Feb 2020</a>
+                  <span class="dots">..............</span>1
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sale_image">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 pr-0 pl-0 pt-4">
+          <img
+            class="sale_img"
+            src="img/sale-img.jpg"
+            alt="advertisment image"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

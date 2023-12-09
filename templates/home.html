@@ -87,7 +87,7 @@
         </div>
         <div class="portfolio-text">
           <p class="portfolio-vert text-grey">{{noticia.categoria_noticia}}</p>
-          <a class="text-black" href="blogs.html"
+          <a class="text-black" href="{% url 'noticias:detalle' noticia.pk %}"
             ><h2 class="heading ml-3">{{noticia.titulo}}</h2></a
           >
           <p class="date text-grey">{{noticia.fecha_publicacion}}</p>

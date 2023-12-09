@@ -17,6 +17,7 @@ class Noticia(models.Model):
     imagenes = models.ImageField(upload_to='noticias')
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
     categoria_noticia = models.ForeignKey(Categoria, on_delete= models.SET_NULL, null=True)
+    cant_vistas = models.IntegerField(default=0)
 
     def __str__(self):
         return self.titulo

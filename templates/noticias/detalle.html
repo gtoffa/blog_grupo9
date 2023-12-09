@@ -1,321 +1,91 @@
-{% extends 'base.html' %} {% load static %} {% block contenido %} {% include
-"navbar.html" %}
-<div id="page_content">
-  <!--HEADER IMAGE-->
-  <section id="bg-blog-detail-img" class="bg-blog-detail-img">
-    <div class="overlay"></div>
-  </section>
+{% extends 'base.html' %} 
+{% load static %} 
+{% block contenido %} 
+{% include "navbar.html" %}
+<section id="bg-contact-img" class="bg-contact-img">
+  <div class="overlay"></div>
+</section>
 
-  <section id="search">
-    <div class="container">
-      <div class="row pt-lg-5">
-        <div class="col-sm-12 col-ms-8 col-lg-8">
-          <div class="text_minimal pt-0">
-            <h1 class="pt-3 font-weight-bold blog_detail-heading text-black">
-              {{noticias.titulo}}
-            </h1>
-            <p class="sub-heading pt-0 text-grey">
-              {{noticias.contenido|safe}}
-            </p>
-          </div>
+<section class="contact-sec" id="contact-sec">
 
-          <div class="horizontal-line mt-5"></div>
-
-          <div class="written">
-            <div class="written_outerbox mt-5 display">
-              <img
-                class="written_img"
-                src="{% static 'img/comment_img.png' %}"
-                alt=""
-              />
-              <div class="written_text">
-                <p class="date text-black">WRITTEN BY</p>
-                <h1 class="main_written text-black">Enna Janes</h1>
-                <p class="sub-heading mt-0">
-                  Nam ut rutrum ex, venenatis sollicitudin urna. Aliquam erat
-                  volutpat. Integer eu ipsum sem. Ut lacus vestibulum maximus
-                  suscipit.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="comment">
-            <div class="comment_write">
-              <div class="icon_comment">
-                <i class="far fa-user user_icon"></i>
-
-                <div class="icon_text">
-                  <h1 class="main_written font">Mark Edison</h1>
-                  <p class="date margin_days text-black">20 days ago</p>
-                </div>
-              </div>
-              <p class="sub-heading mt-1">
-                Nam ut rutrum ex, venenatis sollicitudin urna. Aliquam erat
-                volutpat. Integer eu ipsum sem. Ut lacus vestibulum maximus
-                suscipit.
-              </p>
-            </div>
-
-            <h1 class="comment_text text-black mt-6 mb-5">Write a comment</h1>
-            <form>
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <input
-                      class="form-control"
-                      type="text"
-                      placeholder="Name"
-                      required
-                      id="Name"
-                      name="Name"
-                    />
-                  </div>
-                </div>
-
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <input
-                      class="form-control"
-                      type="email"
-                      placeholder="Email"
-                      required
-                      id="email"
-                      name="email"
-                    />
-                  </div>
-                </div>
-
-                <div class="col-12">
-                  <div class="form-group">
-                    <span class="message-error error"></span>
-                    <textarea
-                      class="form-control"
-                      rows="5"
-                      required
-                      id="comment"
-                      placeholder="Comment"
-                    ></textarea>
-                  </div>
-                  <button
-                    type="submit"
-                    class="btn btn-large btn-primary padding_button w-100"
-                    id="submit_btn"
-                  >
-                    SUBMIT REQUEST
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <div class="col-12 col-lg-4 order-2 order-md-1 margin_small">
-          <div class="search_outerbox">
-            <div class="input-group">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Search for..."
-              />
-              <span class="input-group-btn">
-                <button class="btn btn-search" type="button">
-                  <i class="fa fa-search fa-fw"></i>
-                </button>
-              </span>
-            </div>
-          </div>
-
-          <section id="topics">
-            <div class="container">
-              <div class="row">
-                <div class="col-12 pr-0 pl-0">
-                  <div class="topic_outerbox mt-4">
-                    <h2>Topics</h2>
-                    <div class="inner-box">
-                      <ul class="sub-heading">
-                        <li>
-                          <a href="#">Art</a>
-                          <span class="dots">.................</span> 4
-                        </li>
-                        <li>
-                          <a href="#">Fashion</a>
-                          <span class="dots pr-1">..............</span>5
-                        </li>
-                        <li>
-                          <a href="#">Corona</a
-                          ><span class="dots pr-1">...............</span>1
-                        </li>
-                        <li>
-                          <a href="#">Sports</a>
-                          <span class="dots">...............</span> 8
-                        </li>
-                        <li>
-                          <a href="#">Travel</a>
-                          <span class="dots">................</span>6
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section id="popular_post">
-            <div class="container">
-              <div class="row">
-                <div class="col-12 p-0">
-                  <div class="outer_popular mt-4">
-                    <h2 class="text-black">Popular Post</h2>
-                    <div class="outer mt-4 display">
-                      <div class="popular_image">
-                        <a href="detail-blog.html"
-                          ><img src="img/post1.jpg" alt="popular image"
-                        /></a>
-                      </div>
-                      <div class="text_post">
-                        <p class="main">Minimal Post...</p>
-                        <p class="date">August 13, 2019 by</p>
-                        <span>Mark Edison</span>
-                      </div>
-                    </div>
-
-                    <div class="outer pt-lg-3 display">
-                      <div class="popular_image">
-                        <a href="detail-blog.html"
-                          ><img src="img/post2.jpg" alt="audio image"
-                        /></a>
-                      </div>
-                      <div class="text_post">
-                        <p class="main">Standard Post....</p>
-                        <p class="date">October 22, 2019 by</p>
-                        <span>Mark Edison</span>
-                      </div>
-                    </div>
-
-                    <div class="outer pt-lg-3 display">
-                      <div class="popular_image">
-                        <a href="detail-blog.html"
-                          ><img src="img/post3.jpg" alt="standard image"
-                        /></a>
-                      </div>
-                      <div class="text_post">
-                        <p class="main">Standard Post...</p>
-                        <p class="date">October 30, 2019 by</p>
-                        <span>Mark Edison</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section id="tags">
-            <div class="container">
-              <div class="row">
-                <div class="col-12 pr-0 pl-0">
-                  <div class="outer_tag mt-4">
-                    <h2 class="main_tag">Tags</h2>
-                    <div class="inner_tag">
-                      <div class="tag_text">
-                        <span><a href="">ART</a></span>
-                        <span><a href="">FASHION</a></span>
-                        <span><a href="">SPORTS</a></span>
-                        <span><a href="">TRAVEL</a></span>
-                        <span><a href="">CORONA</a></span>
-                        <span><a href="">PHOTOGRAPHY</a></span>
-                        <span><a href="">CLOTHING</a></span>
-                        <span><a href="">TRENDS</a></span>
-                        <span><a href="">EVENTS</a></span>
-                        <span><a href="">BLOGGERS</a></span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section id="archieve">
-            <div class="container">
-              <div class="row">
-                <div class="col-12 pr-0 pl-0">
-                  <div class="topic_outerbox mt-4">
-                    <h2>Archives</h2>
-                    <div class="inner-box1">
-                      <ul class="sub-heading">
-                        <li>
-                          <a href="#">May 2016</a>
-                          <span class="dots">..............</span>1
-                        </li>
-                        <li>
-                          <a href="#">July 2015</a>
-                          <span class="dots">..............</span>3
-                        </li>
-                        <li>
-                          <a href="#">Dec 2017</a>
-                          <span class="dots">..............</span>1
-                        </li>
-                        <li>
-                          <a href="#">Oct 2019</a>
-                          <span class="dots">..............</span>6
-                        </li>
-                        <li>
-                          <a href="#">Sep 2018</a>
-                          <span class="dots">..............</span>8
-                        </li>
-                        <li>
-                          <a href="#">Feb 2020</a>
-                          <span class="dots">..............</span>1
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <div class="sale_image">
-            <div class="container">
-              <div class="row">
-                <div class="col-12 pr-0 pl-0 pt-4">
-                  <img
-                    class="sale_img"
-                    src="img/sale-img.jpg"
-                    alt="advertisment image"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!--  START FOOTER SECTION  -->
-  <section id="footer" class="footer">
-    <div class="container">
+  <div class="container">
       <div class="row">
-        <div class="col-12 text-center">
-          <ul class="footer_ul">
-            <li class="footer_list"><i class="lab la-facebook-f"></i></li>
-            <li class="footer_list"><i class="lab la-twitter"></i></li>
-            <li class="footer_list"><i class="lab la-google-plus"></i></li>
-            <li class="footer_list"><i class="lab la-linkedin-in"></i></li>
-            <li class="footer_list"><i class="lab la-instagram"></i></li>
-            <li class="footer_list"><i class="las la-envelope"></i></li>
-          </ul>
-          <p class="info footer_text">
-            <i class="far fa-copyright"></i>2023 MegaOne. Made with love by
-            themesindustry
-          </p>
-        </div>
+          <div class="col-12 col-lg-6 contact-description wow slideInLeft" data-wow-delay=".8s">
+              <div class="contact-detail wow fadeInLeft">
+                  <div class="ex-detail">
+                      <p class="portfolio-vert text-grey">contact us</p>
+                      <h2 class="heading text-black pl-3">Get In<br> Touch</h2>
+                  </div>
+                  <p class="sub-heading text-grey small-text text-center text-md-left">
+                      Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard.
+                  </p>
+                  <div class="row location-details text-center text-md-left">
+                      <div class="col-12 col-md-6 country-1">
+                          <h4 class="heading-text text-left text-black">United States</h4>
+                          <ul>
+                              <li><i class="fas fa-mobile-alt"></i><a href="#">+(34) 609 33 17 54</a></li>
+                              <li><i class="fas fa-envelope"></i><a href="#">email@website.com</a></li>
+                              <li><i class="fas fa-map-marker"></i><a href="#">201 Oak Street 27 Manchester, USA</a></li>
+                          </ul>
+                      </div>
+                      <div class="col-12 col-md-6 couuntry-1">
+                          <h4 class="heading-text text-left text-black">Australia</h4>
+                          <ul>
+                              <li><i class="fas fa-mobile-alt"></i><a href="#">+(34) 609 33 17 54</a></li>
+                              <li><i class="fas fa-envelope"></i><a href="#">email@website.com</a></li>
+                              <li><i class="fas fa-map-marker"></i><a href="#">201 Oak Street 27 Manchester, USA</a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-12 col-lg-6 contact-box text-center text-md-left wow slideInRight" data-wow-delay=".8s">
+              <div class="c-box wow fadeInRight">
+                  <h4 class="small-heading">Leave Message</h4>
+                  <form class="contact-form" id="contact-form-data">
+                      <div class="row my-form">
+
+                          <div class="col-md-12 col-sm-12">
+                              <div id="result"></div>
+                          </div>
+
+                          <div class="col-12 col-md-6">
+                              <input type="text" class="form-control" id="candidate_fname" name="firstName" placeholder="First Name" required="required">
+                          </div>
+                          <div class="col-12 col-md-6">
+                              <input type="text" class="form-control" id="candidate_lname" name="lastName" placeholder="Last Name" required="required">
+                          </div>
+                          <div class="col-12 col-md-6">
+                              <input type="email" class="form-control" id="user_email" name="userEmail" placeholder="Email" required="required">
+                          </div>
+                          <div class="col-12 col-md-6">
+                              <input type="text" class="form-control" id="user_subject" name="userSubject" placeholder="Subject" required="required">
+                          </div>
+                          <div class="col-12">
+                              <textarea class="form-control" id="user_message" name="userMessage" placeholder="Message" rows="7" required="required"></textarea>
+                          </div>
+                          <div class="col-12">
+                              <button class="btn btn-primary contact_btn" type="button">SUBMIT
+                              </button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
       </div>
-    </div>
-  </section>
-</div>
+  </div>
+</section>
+
+<!-- START MAP SECTION  -->
+<section id="map">
+  <div class="row">
+      <div class="col-12">
+          <div class="mapouter">
+              <div class="gmap_canvas">
+                  <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3333.9674103770367!2d-111.89998968532109!3d33.31966746342612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDE5JzEwLjgiTiAxMTHCsDUzJzUyLjEiVw!5e0!3m2!1sen!2s!4v1573716071790!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen=""></iframe>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
 {% endblock contenido %}
