@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apps.usuarios',
     'apps.noticias',
     'apps.home',
+    'apps.contacto',
     'ckeditor'
 ]
 
