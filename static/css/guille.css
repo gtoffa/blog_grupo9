@@ -4,3 +4,38 @@
     -webkit-line-clamp: 4; /* Muestra solo 3 líneas */
     -webkit-box-orient: vertical;
   }
+
+  .minimal-post {
+    max-width: 150px;  
+    overflow: hidden; 
+    text-overflow: ellipsis;   
+    
+  }
+  
+  /* Otras propiedades opcionales para mejorar la apariencia */
+  .minimal-post a {
+      
+    text-decoration: none; /* Elimina la decoración de subrayado del enlace */
+    text-decoration: none; /* E
+  }
+  
+  .minimal-post a:hover {
+    text-decoration: underline; /* Subrayado al pasar el ratón sobre el enlace */
+  }
+/* Establece las dimensiones del contenedor */
+.imagen-container {
+  margin-top: 12px;
+  width: 91px !important;
+  height: 91px !important;
+  overflow: hidden !important; /* Para recortar cualquier parte de la imagen que exceda las dimensiones del contenedor */
+  display: inline-block !important; /* Para permitir que el contenedor tenga dimensiones específicas y se comporte como un bloque en línea */
+}
+
+ 
+
+.imagen-container img {
+  width: 100% !important; /* Ajusta el ancho al 100% del contenedor */
+  height: 100% !important; /* Permite que la altura se ajuste automáticamente para mantener la relación de aspecto */
+  object-fit: cover!important; /* Ajusta el tamaño de la imagen manteniendo su relación de aspecto y cubriendo el contenedor */
+ 
+}

@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Noticia, Categoria
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Count
+from django.db.models.functions import TruncYear, TruncMonth
+from django.urls import reverse
 
 # Create your views here.
 
@@ -7,34 +11,57 @@ from .models import Noticia, Categoria
 def ListarNoticias(request):
     contexto = {}
     id_categoria = request.GET.get("id", None)
+    antiguedad = request.GET.get("antiguedad", None)
+    orden = request.GET.get("orden", None)
+    page = request.GET.get('page', 1)
 
+    n = Noticia.objects.all()
     if id_categoria:
-        n = Noticia.objects.filter(categoria_noticia=id_categoria)
+        n = n.filter(categoria_noticia=id_categoria)
+        cat = Categoria.objects.get(id=id_categoria)
     else:
-        n = Noticia.objects.all()  # SELECT * FROM NOTICIAS
+        cat = None
 
-    # filtrar por antiguedad asc
-    antiguedad_asc = request.GET.get("antiguedad_asc")
-    if antiguedad_asc:
-        n = Noticia.objects.all().order_by('fecha_publicacion')  # ordena por fecha
+    if antiguedad == "asc":
+        n = n.order_by('fecha_publicacion')
+    elif antiguedad == "desc":
+        n = n.order_by('-fecha_publicacion')
 
-    # filtrar por antiguedad desc
-    antiguedad_desc = request.GET.get("antiguedad_desc")
-    if antiguedad_desc:
-        n = Noticia.objects.all().order_by('-fecha_publicacion')  # ordena por fecha
+    if orden == "asc":
+        n = n.order_by('titulo')
+    elif orden == "desc":
+        n = n.order_by('-titulo')
 
-    # filtrar por orden alfabetico asc
-    orden_asc = request.GET.get("orden_asc")
-    if orden_asc:
-        n = Noticia.objects.all().order_by('titulo')  # ordena por titulo
+    # Crear un objeto Paginator
+    registros_por_pagina = 1
+    paginator = Paginator(n, registros_por_pagina)
+    # Obtener el número de página desde la solicitud GET
 
-    # filtrar por orden alfabetico desc
-    orden_desc = request.GET.get("orden_desc")
-    if orden_desc:
-        n = Noticia.objects.all().order_by('-titulo')  # ordena por titulo
+    try:
+        # Obtener la página actual
+        registros_pagina_actual = paginator.page(page)
+    except PageNotAnInteger:
+        # Si la página no es un número entero, mostrar la primera página
+        registros_pagina_actual = paginator.page(1)
+    except EmptyPage:
+        # Si la página está fuera de rango, mostrar la última página
+        registros_pagina_actual = paginator.page(paginator.num_pages)
 
-    cat = Categoria.objects.all().order_by('nombre')  # ordena por nombre
-    contexto['noticias'] = n
+    # Obtener la cantidad total de registros
+    total_registros = paginator.count
+
+    # Calcular la cantidad total de páginas
+    total_paginas = paginator.num_pages
+
+    contexto = {
+        'noticias': n,
+        'registros': registros_pagina_actual,
+        'total_registros': total_registros,
+        'total_paginas': total_paginas,
+        'categoria_select': cat,
+
+    }
+    contexto = PanelNoticias(contexto)
 
     return render(request, 'noticias/listar.html', contexto)
 
@@ -43,15 +70,22 @@ def DetalleNoticia(request, pk):
     contexto = {}
 
     n = Noticia.objects.get(pk=pk)  # SELECT * FROM NOTICIAS WHERE id = 1
-    
-    #actualizar view
-    n.cant_vistas + 1
-    
+
+    # actualizar numeros de visitas
+    n.cant_vistas = n.cant_vistas + 1
+    n.save()
+
     contexto['noticias'] = n
 
     contexto = PanelNoticias(contexto)
-
-    return render(request, 'noticias/detalle.html', contexto)
+    
+    id_categoria = request.GET.get("id", None)
+    redirect_url = reverse('noticias:listar')
+    if id_categoria is not None:
+        redirect_url += f'?id={id_categoria}' 
+        return redirect(redirect_url)
+    else:
+        return render(request, 'noticias/detalle.html', contexto)
 
 
 def Ultmias10Noticias(request):
@@ -60,7 +94,23 @@ def Ultmias10Noticias(request):
 
 
 def PanelNoticias(contexto):
-    
+
+    # Categorias disponibles
     cat = Categoria.objects.all().order_by('nombre')  # ordena por nombre
     contexto['categorias'] = cat
+
+    # Top Noticias
+    n = Noticia.objects. all().order_by('-cant_vistas')[:3]
+    contexto['popular_noticias'] = n
+
+    resumen_noticias = (
+        Noticia.objects
+        .annotate(month=TruncMonth('fecha_publicacion'))
+        .values('month')
+        .annotate(cant_noticias=Count('id'))
+    )
+
+    # Formatear y mostrar el resumen
+    contexto['resumen_noticias'] = resumen_noticias
+
     return contexto
