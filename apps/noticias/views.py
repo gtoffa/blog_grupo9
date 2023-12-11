@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Noticia, Categoria
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Count
+from django.db.models import Count , Q
 from django.db.models.functions import TruncYear, TruncMonth
 from django.urls import reverse
 
@@ -10,27 +10,35 @@ from django.urls import reverse
 
 def ListarNoticias(request):
     contexto = {}
-    id_categoria = request.GET.get("id", None)
+    categoria_todos = Categoria(pk=0, nombre='Todos')
+    id_categoria = request.GET.get("id", "0")
     antiguedad = request.GET.get("antiguedad", None)
+    buscar = request.GET.get("buscar", None)
     orden = request.GET.get("orden", None)
     page = request.GET.get('page', 1)
 
     n = Noticia.objects.all()
-    if id_categoria:
+
+    if id_categoria != "0":
         n = n.filter(categoria_noticia=id_categoria)
         cat = Categoria.objects.get(id=id_categoria)
     else:
-        cat = None
+        cat = categoria_todos
+        
+    if buscar:
+         n = n.filter(Q(titulo__icontains=buscar) | Q(contenido__icontains=buscar))
 
-    if antiguedad == "asc":
-        n = n.order_by('fecha_publicacion')
-    elif antiguedad == "desc":
-        n = n.order_by('-fecha_publicacion')
+    if antiguedad:
+        if antiguedad == "asc":
+            n = n.order_by('fecha_publicacion')
+        elif antiguedad == "desc":
+            n = n.order_by('-fecha_publicacion')
 
-    if orden == "asc":
-        n = n.order_by('titulo')
-    elif orden == "desc":
-        n = n.order_by('-titulo')
+    if orden:
+        if orden == "asc":
+            n = n.order_by('titulo')
+        elif orden == "desc":
+            n = n.order_by('-titulo')
 
     # Crear un objeto Paginator
     registros_por_pagina = 1
@@ -59,6 +67,10 @@ def ListarNoticias(request):
         'total_registros': total_registros,
         'total_paginas': total_paginas,
         'categoria_select': cat,
+        'orden': orden,
+        'antiguedad': antiguedad,
+        'page': page,
+        'buscar': buscar,
 
     }
     contexto = PanelNoticias(contexto)
@@ -78,11 +90,11 @@ def DetalleNoticia(request, pk):
     contexto['noticias'] = n
 
     contexto = PanelNoticias(contexto)
-    
+
     id_categoria = request.GET.get("id", None)
     redirect_url = reverse('noticias:listar')
     if id_categoria is not None:
-        redirect_url += f'?id={id_categoria}' 
+        redirect_url += f'?id={id_categoria}'
         return redirect(redirect_url)
     else:
         return render(request, 'noticias/detalle.html', contexto)
@@ -94,9 +106,14 @@ def Ultmias10Noticias(request):
 
 
 def PanelNoticias(contexto):
-
+    categoria_todos = Categoria(pk=0, nombre='Todos')
     # Categorias disponibles
-    cat = Categoria.objects.all().order_by('nombre')  # ordena por nombre
+
+    cat = []
+    cat.append(categoria_todos)
+    # ordena por nombre
+    cat.extend(list(Categoria.objects.all().order_by('nombre')))
+
     contexto['categorias'] = cat
 
     # Top Noticias

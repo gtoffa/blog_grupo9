@@ -1,14 +1,25 @@
 {% load static %}
 <div class="col-12 col-lg-4 order-2 order-md-1 margin_small">
   <div class="search_outerbox">
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search for..." />
-      <span class="input-group-btn">
-        <button class="btn btn-search" type="button">
+    <form method="get" action="{% url 'noticias:listar'%}">
+      <div class="input-group">
+
+        <input type="text" id="buscarInput" name="buscar" value="{% if buscar %}{{buscar}}{% endif %}" class="form-control" placeholder="Buscar..." />
+        {% if buscar %}
+        <span class="input-group-btn">
+          <button class="btn   btn-search" type="submit">
+            <i class="fa fa-trash fa-fw"></i>
+          </button>
+       </span>
+       {% endif %}
+       <span class="input-group-btn">
+ 
+        <button class="btn btn-search" type="submit">
           <i class="fa fa-search fa-fw"></i>
-        </button>
-      </span>
-    </div>
+         </button>
+     </span>
+      </div>
+    </form>
   </div>
   <section id="tags">
     <div class="container">
@@ -96,3 +107,5 @@
     </div>
   </section>
 </div>
+
+
