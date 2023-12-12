@@ -27,61 +27,24 @@
             <div class="written_outerbox mt-5 display">
               <img
                 class="written_img"
-                src="{% static 'img/comment_img.png' %}"
+                src="{{noticias.autor.imagenes.url}}"
                 alt=""
               />
               <div class="written_text">
-                <p class="date text-black">WRITTEN BY</p>
-                <h1 class="main_written text-black">Enna Janes</h1>
+                <p class="date text-black">ESCRITO POR</p>
+                <h1 class="main_written text-black">{{noticias.autor}}</h1>
               </div>
             </div>
           </div>
 
-          <div class="comment">
-            <div class="comment_write">
-              <div class="icon_comment">
-                <i class="far fa-user user_icon"></i>
-
-                <div class="icon_text">
-                  <h1 class="main_written font">Mark Edison</h1>
-                  <p class="date margin_days text-black">20 days ago</p>
-                </div>
-              </div>
-              <p class="sub-heading mt-1">
-                Nam ut rutrum ex, venenatis sollicitudin urna. Aliquam erat
-                volutpat. Integer eu ipsum sem. Ut lacus vestibulum maximus
-                suscipit.
-              </p>
-            </div>
-
-            <h1 class="comment_text text-black mt-6 mb-5">Write a comment</h1>
+          {% include "cargar_comentarios.html" %}
+            
+            {% if user.is_authenticated %}
+            <h1 class="comment_text text-black mt-6 mb-5">
+              ESCRIBIR UN COMENTARIO</h1>
             <form>
               <div class="row">
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <input
-                      class="form-control"
-                      type="text"
-                      placeholder="Name"
-                      required
-                      id="Name"
-                      name="Name"
-                    />
-                  </div>
-                </div>
-
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <input
-                      class="form-control"
-                      type="email"
-                      placeholder="Email"
-                      required
-                      id="email"
-                      name="email"
-                    />
-                  </div>
-                </div>
+                 
 
                 <div class="col-12">
                   <div class="form-group">
@@ -101,9 +64,27 @@
                   >
                     SUBMIT REQUEST
                   </button>
+
                 </div>
               </div>
             </form>
+            <button id="boton-ajax">Enviar Solicitud AJAX</button>
+            <script>
+              $("#cargar-comentarios").click(function() {
+                $.get('/noticias/ajax' + noticia_id + '/', function(data) {
+                    $("#test").html(data);  // Actualizar el contenido del div con ID "test"
+                }).fail(function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert('Error en la solicitud AJAX');
+                });
+            });
+               
+            </script>
+            {% else %}
+            <h4 class="comment_text text-black mt-6 mb-5">
+              Registrarte para escribir un comentario
+            </h4>
+            {% endif %}
           </div>
         </div>
         {% include "./panel_noticias.html" %}

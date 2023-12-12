@@ -5,6 +5,10 @@ from django.db.models import Count , Q
 from django.db.models.functions import TruncYear, TruncMonth
 from django.urls import reverse
 from datetime import datetime
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django_ajax.decorators import ajax
+from django.views.generic import TemplateView 
 # Create your views here.
 
 
@@ -151,3 +155,11 @@ def PanelNoticias(contexto):
     contexto['resumen_noticias'] = resumen_noticias
 
     return contexto
+
+
+@ajax
+def cargar_comentarios(request, noticia_id):
+    contexto = {}
+    n = Noticia.objects.get(pk=noticia_id) 
+    contexto['noticias'] = n
+    return render(request, 'ajax/cargar_comentarios.html', contexto)

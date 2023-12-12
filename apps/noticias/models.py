@@ -10,6 +10,14 @@ class Categoria(models.Model):
         return self.nombre
     
 
+class Comentario(models.Model):
+    contenido = models.TextField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+
+  
+ 
+
 class Noticia(models.Model):
     titulo = models.CharField(max_length=255) # = VARCHAR | max_length longitud max
     #Uso de ckeditor para usar el edito html
@@ -19,9 +27,12 @@ class Noticia(models.Model):
     imagenes = models.ImageField(upload_to='noticias')
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
     categoria_noticia = models.ForeignKey(Categoria, on_delete= models.SET_NULL, null=True)
+   
     cant_vistas = models.IntegerField(default=0)
     #Para poder default=Usuario.objects.get(is_superuser=True).pk tiene que existir el super usuario  
-    autor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, default=Usuario.objects.get(is_superuser=True).pk)
+    autor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True)
+    comentarios = models.ManyToManyField(Comentario, related_name='noticia_comentarios')
+
 
     
     def __str__(self):

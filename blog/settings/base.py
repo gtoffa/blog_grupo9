@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'apps.noticias',
     'apps.home',
     'apps.contacto',
-    'ckeditor'
+    'ckeditor',
+    'django_ajax'
 ]
 
 MIDDLEWARE = [

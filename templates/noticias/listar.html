@@ -35,7 +35,7 @@
             <li class="nav-item">
               
               <div class="btn-group" role="group" aria-label="Basic example">
-                <a type="button" class="btn {% if orden %}btn-dark{% else %}btn-outline-dark{% endif %}" href="?orden={% if orden  == 'asc' %}desc{% else %}asc{% endif %}{% if categoria_select %}&id={{ categoria_select.pk }}{% endif %}{% if buscar %}&buscar={{ buscar }}{% endif %}{% if archivo %}&archivo={{ archivo }}{% endif %}"  >
+                <a type="button" style="text-decoration: auto;" class="btn {% if orden %}btn-dark{% else %}btn-outline-dark{% endif %}" href="?orden={% if orden  == 'asc' %}desc{% else %}asc{% endif %}{% if categoria_select %}&id={{ categoria_select.pk }}{% endif %}{% if buscar %}&buscar={{ buscar }}{% endif %}{% if archivo %}&archivo={{ archivo }}{% endif %}"  >
                   Orden
                   {% if orden is None %}
                       <i class="las la-sort-alpha-down"></i>
@@ -46,7 +46,7 @@
                       <i class="las la-sort-alpha-up-alt"></i>
                   {% endif %}
                 </a>
-                <a type="button"  class="btn {% if antiguedad %}btn-dark{% else %}btn-outline-dark{% endif %}"   href="?antiguedad={% if antiguedad  == 'asc' %}desc{% else %}asc{% endif %}{% if categoria_select %}&id={{ categoria_select.pk }}{% endif %} {% if buscar %}&buscar={{ buscar }}{% endif %}"  >Fecha  
+                <a type="button" style="text-decoration: auto;" class="btn {% if antiguedad %}btn-dark{% else %}btn-outline-dark{% endif %}"   href="?antiguedad={% if antiguedad  == 'asc' %}desc{% else %}asc{% endif %}{% if categoria_select %}&id={{ categoria_select.pk }}{% endif %} {% if buscar %}&buscar={{ buscar }}{% endif %}"  >Fecha  
                   {% if antiguedad is None %}
                      <i class="las la-sort-amount-down-alt"></i>
                   {% elif antiguedad  == 'asc'  %}

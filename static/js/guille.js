@@ -42,6 +42,4 @@ function resaltarTexto() {
 }
 
 
-$(document).ready(function() {
-  $('.treeview').mdbTreeview();
-});
+ 

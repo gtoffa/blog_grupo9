@@ -1,0 +1,16 @@
+{% for comment in noticias.comentarios.all %}
+
+<div class="comment">
+  <div class="comment_write">
+    <div class="icon_comment">
+      <i class="far fa-user user_icon"></i>
+
+      <div class="icon_text">
+        <h1 class="main_written font">{{comment.usuario}}</h1>
+        <p class="date margin_days text-black">{{comment.fecha_creacion}}</p>
+      </div>
+    </div>
+    <p class="sub-heading mt-1">{{comment.contenido}}</p>
+  </div>
+</div>
+{% endfor %}

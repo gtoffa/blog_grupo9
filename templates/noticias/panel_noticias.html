@@ -12,25 +12,32 @@
           placeholder="Buscar..."
         />
        
+        {% if categoria_select %}
         <input
         type="hidden"
         id="buscarInput"
         name="id"
-        value="{% if categoria_select %}{{ categoria_select.pk }}{% endif %}"
+        value="{{ categoria_select.pk }}"
         />
+        {% endif %}
 
+        {% if archivo %}
         <input
         type="hidden"
         id="buscarInput"
         name="archivo"
-        value="{% if archivo %}{{ archivo }}{% endif %}"
+        value="{{ archivo }}"
         />
+        {% endif %}
+
+        {% if orden %}
         <input
         type="hidden"
         id="buscarInput"
         name="orden"
-        value="{% if orden %}{{ orden }}{% endif %}"
+        value="{{ orden }}"
         />
+        {% endif %}
         <input
         type="hidden"
         id="buscarInput"
@@ -58,12 +65,16 @@
     </form>
 
     <script>
+      try{
       document
         .getElementById("limpiarBtn")
         .addEventListener("click", function () {
           document.getElementById("buscarInput").value = ""; 
           document.getElementById("buscarBtn").click(); 
         });
+      }catch(e){
+
+      }
 
       
     </script>
