@@ -1,25 +1,72 @@
 {% load static %}
 <div class="col-12 col-lg-4 order-2 order-md-1 margin_small">
   <div class="search_outerbox">
-    <form method="get" action="{% url 'noticias:listar'%}">
+    <form method="get" action="{% url 'noticias:listar' %}">
       <div class="input-group">
+        <input
+          type="text"
+          id="buscarInput"
+          name="buscar"
+          value="{% if buscar %}{{ buscar }}{% endif %}"
+          class="form-control"
+          placeholder="Buscar..."
+        />
+       
+        <input
+        type="hidden"
+        id="buscarInput"
+        name="id"
+        value="{% if categoria_select %}{{ categoria_select.pk }}{% endif %}"
+        />
 
-        <input type="text" id="buscarInput" name="buscar" value="{% if buscar %}{{buscar}}{% endif %}" class="form-control" placeholder="Buscar..." />
+        <input
+        type="hidden"
+        id="buscarInput"
+        name="archivo"
+        value="{% if archivo %}{{ archivo }}{% endif %}"
+        />
+        <input
+        type="hidden"
+        id="buscarInput"
+        name="orden"
+        value="{% if orden %}{{ orden }}{% endif %}"
+        />
+        <input
+        type="hidden"
+        id="buscarInput"
+        name="antiguedad"
+        value="{% if antiguedad %}{{ antiguedad }}{% endif %}"
+        />
+
+
+
+
         {% if buscar %}
         <span class="input-group-btn">
-          <button class="btn   btn-search" type="submit">
+          <button id="limpiarBtn" class="btn btn-search" type="button">
             <i class="fa fa-trash fa-fw"></i>
           </button>
-       </span>
-       {% endif %}
-       <span class="input-group-btn">
- 
-        <button class="btn btn-search" type="submit">
-          <i class="fa fa-search fa-fw"></i>
-         </button>
-     </span>
+        </span>
+        {% endif %}
+
+        <span class="input-group-btn">
+          <button id="buscarBtn" class="btn btn-search" type="submit">
+            <i class="fa fa-search fa-fw"></i>
+          </button>
+        </span>
       </div>
     </form>
+
+    <script>
+      document
+        .getElementById("limpiarBtn")
+        .addEventListener("click", function () {
+          document.getElementById("buscarInput").value = ""; 
+          document.getElementById("buscarBtn").click(); 
+        });
+
+      
+    </script>
   </div>
   <section id="tags">
     <div class="container">
@@ -33,13 +80,13 @@
                 <span>
                   {% if categoria_select %}
                     {% if categoria_select.pk == cat.pk %}
-                       <a class=" btn-search" href="?id={{cat.pk}}">{{cat.nombre}}</a>
+                       <a class=" btn-search" href="?id={{cat.pk}}{% if buscar %}&buscar={{ buscar }}{% endif %}{% if archivo %}&archivo={{ archivo }}{% endif %}">{{cat.nombre}}</a>
                     {% else %}
-                       <a  href="?id={{cat.pk}}">{{cat.nombre}}</a>
+                       <a  href="?id={{cat.pk}}{% if buscar %}&buscar={{ buscar }}{% endif %}{% if archivo %}&archivo={{ archivo }}{% endif %}">{{cat.nombre}}</a>
             
                     {% endif %} 
                   {% else %}
-                    <a  href="?id={{cat.pk}}">{{cat.nombre}}</a>
+                    <a  href="?id={{cat.pk}}{% if buscar %}&buscar={{ buscar }}{% endif %}{% if archivo %}&archivo={{ archivo }}{% endif %}">{{cat.nombre}}</a>
                   {% endif %} 
                 </span>
                 {% endfor %}
@@ -94,7 +141,7 @@
               <ul class="sub-heading">
                 {% for resumen in resumen_noticias %}
                 <li>
-                  <a href="#">{{ resumen.month|date:'M Y' }}</a>
+                  <a href="?archivo={{ resumen.month|date:'m-Y' }}{% if categoria_select %}&id={{ categoria_select.pk }}{% endif %}">{{ resumen.month|date:'M Y' }}</a>
                   <span class="dots">..............</span>
                   {{ resumen.cant_noticias }}
                 </li>

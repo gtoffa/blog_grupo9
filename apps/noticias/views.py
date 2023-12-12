@@ -4,19 +4,21 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count , Q
 from django.db.models.functions import TruncYear, TruncMonth
 from django.urls import reverse
-
+from datetime import datetime
 # Create your views here.
 
 
 def ListarNoticias(request):
     contexto = {}
-    categoria_todos = Categoria(pk=0, nombre='Todos')
+    categoria_todos = Categoria(pk=0, nombre='Todas')
     id_categoria = request.GET.get("id", "0")
     antiguedad = request.GET.get("antiguedad", None)
     buscar = request.GET.get("buscar", None)
     orden = request.GET.get("orden", None)
+    archivo = request.GET.get("archivo", None)
     page = request.GET.get('page', 1)
-
+    fecha_objeto = None
+  
     n = Noticia.objects.all()
 
     if id_categoria != "0":
@@ -27,6 +29,18 @@ def ListarNoticias(request):
         
     if buscar:
          n = n.filter(Q(titulo__icontains=buscar) | Q(contenido__icontains=buscar))
+         
+    if archivo:
+      
+        try:
+            fecha_objeto = datetime.strptime(archivo, '%m-%Y').date()
+            
+    
+        except ValueError:
+            fecha_objeto = None
+        
+        if fecha_objeto:
+                n = n.filter(fecha_publicacion__month=fecha_objeto.month, fecha_publicacion__year=fecha_objeto.year)  
 
     if antiguedad:
         if antiguedad == "asc":
@@ -60,7 +74,7 @@ def ListarNoticias(request):
 
     # Calcular la cantidad total de páginas
     total_paginas = paginator.num_pages
-
+   
     contexto = {
         'noticias': n,
         'registros': registros_pagina_actual,
@@ -71,6 +85,8 @@ def ListarNoticias(request):
         'antiguedad': antiguedad,
         'page': page,
         'buscar': buscar,
+        'archivo':archivo,
+        'fecha_objeto':fecha_objeto
 
     }
     contexto = PanelNoticias(contexto)
@@ -92,9 +108,13 @@ def DetalleNoticia(request, pk):
     contexto = PanelNoticias(contexto)
 
     id_categoria = request.GET.get("id", None)
+    archivo = request.GET.get("archivo", None)
     redirect_url = reverse('noticias:listar')
     if id_categoria is not None:
         redirect_url += f'?id={id_categoria}'
+        return redirect(redirect_url)
+    elif archivo is not None:
+        redirect_url += f'?archivo={archivo}'
         return redirect(redirect_url)
     else:
         return render(request, 'noticias/detalle.html', contexto)
@@ -106,7 +126,7 @@ def Ultmias10Noticias(request):
 
 
 def PanelNoticias(contexto):
-    categoria_todos = Categoria(pk=0, nombre='Todos')
+    categoria_todos = Categoria(pk=0, nombre='Todas')
     # Categorias disponibles
 
     cat = []

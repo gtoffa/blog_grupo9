@@ -1,6 +1,6 @@
 function resaltarTexto() {
   // Obtener el valor del campo de búsqueda
-  var buscarTexto = document.getElementById("buscarInput").value.toLowerCase();
+  var buscarTexto = document.getElementById("buscarInput").value.trim().toLowerCase();
 
   if (buscarTexto.length > 0) {
     // Obtener todos los elementos <p>
@@ -26,9 +26,9 @@ function resaltarTexto() {
         // Reemplazar la coincidencia con el texto resaltado
         texto.innerHTML = texto.innerHTML.replace(
           parteResaltada,
-          '<span style="color: blue;margin-left: 0px">' +
+          '<strong style="color: #007bff;margin-left: 0px">' +
             parteResaltada +
-            "</span>"
+            "</strong>"
         );
 
         // Encontrar la próxima coincidencia
@@ -40,3 +40,8 @@ function resaltarTexto() {
     });
   }
 }
+
+
+$(document).ready(function() {
+  $('.treeview').mdbTreeview();
+});
