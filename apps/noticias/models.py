@@ -10,12 +10,7 @@ class Categoria(models.Model):
         return self.nombre
     
 
-class Comentario(models.Model):
-    contenido = models.TextField()
-    fecha_creacion = models.DateTimeField(auto_now_add=True)
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
-  
  
 
 class Noticia(models.Model):
@@ -31,9 +26,17 @@ class Noticia(models.Model):
     cant_vistas = models.IntegerField(default=0)
     #Para poder default=Usuario.objects.get(is_superuser=True).pk tiene que existir el super usuario  
     autor = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True)
-    comentarios = models.ManyToManyField(Comentario, related_name='noticia_comentarios')
-
+ 
 
     
     def __str__(self):
         return self.titulo
+    
+class Comentario(models.Model):
+    noticia = models.ForeignKey(Noticia, on_delete=models.CASCADE, related_name='comentarios',)
+    contenido = models.TextField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    usuario = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.contenido

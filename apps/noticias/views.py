@@ -1,14 +1,16 @@
-from django.shortcuts import render, redirect
-from .models import Noticia, Categoria
+from django.shortcuts import get_object_or_404, render, redirect
+from .models import Noticia, Categoria, Comentario
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count , Q
 from django.db.models.functions import TruncYear, TruncMonth
 from django.urls import reverse
 from datetime import datetime
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django_ajax.decorators import ajax
 from django.views.generic import TemplateView 
+from django.contrib.auth.decorators import login_required
+from django.template.loader import render_to_string
 # Create your views here.
 
 
@@ -59,7 +61,7 @@ def ListarNoticias(request):
             n = n.order_by('-titulo')
 
     # Crear un objeto Paginator
-    registros_por_pagina = 1
+    registros_por_pagina = 10
     paginator = Paginator(n, registros_por_pagina)
     # Obtener el número de página desde la solicitud GET
 
@@ -100,14 +102,17 @@ def ListarNoticias(request):
 
 def DetalleNoticia(request, pk):
     contexto = {}
-
+  
     n = Noticia.objects.get(pk=pk)  # SELECT * FROM NOTICIAS WHERE id = 1
-
+    c = n.comentarios.all()
     # actualizar numeros de visitas
     n.cant_vistas = n.cant_vistas + 1
     n.save()
 
-    contexto['noticias'] = n
+    contexto = {
+        'noticias': n,
+        'comentarios': c, 
+    }
 
     contexto = PanelNoticias(contexto)
 
@@ -158,8 +163,37 @@ def PanelNoticias(contexto):
 
 
 @ajax
+@login_required
 def cargar_comentarios(request, noticia_id):
+    noticia = get_object_or_404(Noticia, id = noticia_id)  
     contexto = {}
-    n = Noticia.objects.get(pk=noticia_id) 
-    contexto['noticias'] = n
-    return render(request, 'ajax/cargar_comentarios.html', contexto)
+    if request.method == 'POST':
+        # Obtener el contenido del comentario desde la solicitud POST
+        comentario_contenido = request.POST.get('contenido', '')
+        usuario = request.user.username
+
+        # Verificar si el comentario no está vacío
+        if not comentario_contenido:
+            return JsonResponse({'error': 'El comentario no puede estar vacío'}, status=400)
+
+        # Lógica para crear un comentario en la base de datos
+        Comentario.objects.create(noticia = noticia, usuario = usuario, contenido = comentario_contenido)
+        
+        c = noticia.comentarios.all()
+        contexto = {
+            'comentarios': c, 
+        }    
+        #
+        # Devolver una respuesta JSON con el HTML del nuevo comentario
+        
+        # Renderizar la plantilla de comentario
+        comentario_html = render_to_string('noticias/comentarios.html', contexto)
+
+        # Devolver una respuesta JSON con la plantilla renderizada
+        
+        return HttpResponse(comentario_html)
+    return JsonResponse({'error': 'Solicitud no válida'}, status=400)
+    
+    
+   
+

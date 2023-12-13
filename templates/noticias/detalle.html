@@ -36,13 +36,16 @@
               </div>
             </div>
           </div>
-
-          {% include "cargar_comentarios.html" %}
+          <div id="test">
             
+          
+            {% include "./comentarios.html" %}
+
+          </div>
             {% if user.is_authenticated %}
             <h1 class="comment_text text-black mt-6 mb-5">
               ESCRIBIR UN COMENTARIO</h1>
-            <form>
+            <form id="formulario-comentario">
               <div class="row">
                  
 
@@ -56,28 +59,62 @@
                       id="comment"
                       placeholder="Comment"
                     ></textarea>
+                    <div id="comentario-error" class="text-danger"></div>
                   </div>
                   <button
-                    type="submit"
+                    type="button"
                     class="btn btn-large btn-primary padding_button w-100"
-                    id="submit_btn"
+                    id="enviar-comentario"
                   >
-                    SUBMIT REQUEST
+                     Enviar Comentario
                   </button>
-
+                  <div id="loading" class="d-none">Cargando...</div>
+                  {% csrf_token %}
                 </div>
               </div>
             </form>
-            <button id="boton-ajax">Enviar Solicitud AJAX</button>
             <script>
-              $("#cargar-comentarios").click(function() {
-                $.get('/noticias/ajax' + noticia_id + '/', function(data) {
-                    $("#test").html(data);  // Actualizar el contenido del div con ID "test"
-                }).fail(function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                    alert('Error en la solicitud AJAX');
-                });
-            });
+            $(document).ready(function() {
+              $("#enviar-comentario").click(function() {
+                  var comentario_contenido = $("#comment").val();
+          
+                  if (!comentario_contenido) {
+                      $("#comentario-error").text("El comentario es obligatorio");
+                      return;
+                  } else {
+                      $("#comentario-error").text("");
+                  }
+          
+                  var noticia_id = {{noticias.id}};
+                  // Mostrar indicador de carga
+                  $("#loading").removeClass("d-none");
+                  var csrf_token = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+
+                  $.ajax({
+                      type: 'POST',
+                      url: 'ajax/cargar_comentarios/' + noticia_id + '/',
+                      data: {
+                          'contenido': comentario_contenido,
+                          'csrfmiddlewaretoken': csrf_token,  // Reemplaza esto con la lógica para obtener el token CSRF
+                      },
+                      dataType: 'json',
+                      success: function(data) {
+                          // Actualizar el contenido del div con ID "test" con la respuesta del servidor
+                          $("#test").html(data.content);
+                          console.log(data)
+          
+                          // Limpiar el textarea y ocultar el indicador de carga
+                          $("#comment").val("");
+                          $("#loading").addClass("d-none");
+                      },
+                      error: function(xhr, status, error) {
+                          console.error(xhr.responseText);
+                          alert('Error en la solicitud AJAX');
+                      }
+                  });
+              });
+          });
+             
                
             </script>
             {% else %}
@@ -85,7 +122,7 @@
               Registrarte para escribir un comentario
             </h4>
             {% endif %}
-          </div>
+           
         </div>
         {% include "./panel_noticias.html" %}
         
