@@ -2,7 +2,7 @@
 {% load static %} 
 {% block contenido %} 
 {% include "navbar.html" %}
-<div id="page_content">
+<div id="page_content" idNoticia={{noticias.id}}>
   <!--HEADER IMAGE-->
   <section id="bg-blog-detail-img" class="bg-blog-detail-img">
     <div class="overlay"></div>
@@ -36,96 +36,20 @@
               </div>
             </div>
           </div>
-          <div id="test">
-            
-          
-            {% include "./comentarios.html" %}
-
-          </div>
-            {% if user.is_authenticated %}
-            <h1 class="comment_text text-black mt-6 mb-5">
-              ESCRIBIR UN COMENTARIO</h1>
-            <form id="formulario-comentario">
-              <div class="row">
-                 
-
-                <div class="col-12">
-                  <div class="form-group">
-                    <span class="message-error error"></span>
-                    <textarea
-                      class="form-control"
-                      rows="5"
-                      required
-                      id="comment"
-                      placeholder="Comment"
-                    ></textarea>
-                    <div id="comentario-error" class="text-danger"></div>
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-large btn-primary padding_button w-100"
-                    id="enviar-comentario"
-                  >
-                     Enviar Comentario
-                  </button>
-                  <div id="loading" class="d-none">Cargando...</div>
-                  {% csrf_token %}
-                </div>
-              </div>
-            </form>
-            <script>
-            $(document).ready(function() {
-              $("#enviar-comentario").click(function() {
-                  var comentario_contenido = $("#comment").val();
-          
-                  if (!comentario_contenido) {
-                      $("#comentario-error").text("El comentario es obligatorio");
-                      return;
-                  } else {
-                      $("#comentario-error").text("");
-                  }
-          
-                  var noticia_id = {{noticias.id}};
-                  // Mostrar indicador de carga
-                  $("#loading").removeClass("d-none");
-                  var csrf_token = document.getElementsByName('csrfmiddlewaretoken')[0].value;
-
-                  $.ajax({
-                      type: 'POST',
-                      url: 'ajax/cargar_comentarios/' + noticia_id + '/',
-                      data: {
-                          'contenido': comentario_contenido,
-                          'csrfmiddlewaretoken': csrf_token,  // Reemplaza esto con la lógica para obtener el token CSRF
-                      },
-                      dataType: 'json',
-                      success: function(data) {
-                          // Actualizar el contenido del div con ID "test" con la respuesta del servidor
-                          $("#test").html(data.content);
-                          console.log(data)
-          
-                          // Limpiar el textarea y ocultar el indicador de carga
-                          $("#comment").val("");
-                          $("#loading").addClass("d-none");
-                      },
-                      error: function(xhr, status, error) {
-                          console.error(xhr.responseText);
-                          alert('Error en la solicitud AJAX');
-                      }
-                  });
-              });
-          });
-             
-               
-            </script>
-            {% else %}
-            <h4 class="comment_text text-black mt-6 mb-5">
-              Registrarte para escribir un comentario
-            </h4>
-            {% endif %}
+          <div id="test">{% include "./comentarios.html" %}</div>
+          {% if user.is_authenticated %}
+          <h1 class="comment_text text-black mt-6 mb-5">
+            ESCRIBIR UN COMENTARIO
+          </h1>
            
+          {% include "./formcomentario.html" %}
+          {% else %}
+          <h4 class="comment_text text-black mt-6 mb-5">
+            Registrarte para escribir un comentario
+          </h4>
+          {% endif %}
         </div>
         {% include "./panel_noticias.html" %}
-        
       </div>
     </div>
   </section>
@@ -152,4 +76,58 @@
     </div>
   </section>
 </div>
+
+<!-- Modal de confirmación -->
+<div
+  class="modal fade"
+  id="confirmModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="confirmModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmModalLabel">
+          Confirmar Eliminación
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que deseas eliminar este comentario?
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btncomment btn-secondary"
+          data-dismiss="modal"
+        >
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btncomment btn-danger"
+          id="confirmDeleteBtn"
+        >
+          Eliminar
+        </button>
+        <div
+          id="loading-comment"
+          class="spinner-border text-info d-none"
+          role="status"
+        ></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ 
 {% endblock contenido %}

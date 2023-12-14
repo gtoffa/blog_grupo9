@@ -1,14 +1,14 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Noticia, Categoria, Comentario
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Count , Q
+from django.db.models import Count, Q
 from django.db.models.functions import TruncYear, TruncMonth
 from django.urls import reverse
 from datetime import datetime
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django_ajax.decorators import ajax
-from django.views.generic import TemplateView 
+from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 # Create your views here.
@@ -24,7 +24,7 @@ def ListarNoticias(request):
     archivo = request.GET.get("archivo", None)
     page = request.GET.get('page', 1)
     fecha_objeto = None
-  
+
     n = Noticia.objects.all()
 
     if id_categoria != "0":
@@ -32,21 +32,22 @@ def ListarNoticias(request):
         cat = Categoria.objects.get(id=id_categoria)
     else:
         cat = categoria_todos
-        
+
     if buscar:
-         n = n.filter(Q(titulo__icontains=buscar) | Q(contenido__icontains=buscar))
-         
+        n = n.filter(Q(titulo__icontains=buscar) |
+                     Q(contenido__icontains=buscar))
+
     if archivo:
-      
+
         try:
             fecha_objeto = datetime.strptime(archivo, '%m-%Y').date()
-            
-    
+
         except ValueError:
             fecha_objeto = None
-        
+
         if fecha_objeto:
-                n = n.filter(fecha_publicacion__month=fecha_objeto.month, fecha_publicacion__year=fecha_objeto.year)  
+            n = n.filter(fecha_publicacion__month=fecha_objeto.month,
+                         fecha_publicacion__year=fecha_objeto.year)
 
     if antiguedad:
         if antiguedad == "asc":
@@ -80,7 +81,7 @@ def ListarNoticias(request):
 
     # Calcular la cantidad total de páginas
     total_paginas = paginator.num_pages
-   
+
     contexto = {
         'noticias': n,
         'registros': registros_pagina_actual,
@@ -91,8 +92,8 @@ def ListarNoticias(request):
         'antiguedad': antiguedad,
         'page': page,
         'buscar': buscar,
-        'archivo':archivo,
-        'fecha_objeto':fecha_objeto
+        'archivo': archivo,
+        'fecha_objeto': fecha_objeto
 
     }
     contexto = PanelNoticias(contexto)
@@ -102,7 +103,7 @@ def ListarNoticias(request):
 
 def DetalleNoticia(request, pk):
     contexto = {}
-  
+
     n = Noticia.objects.get(pk=pk)  # SELECT * FROM NOTICIAS WHERE id = 1
     c = n.comentarios.all()
     # actualizar numeros de visitas
@@ -111,7 +112,7 @@ def DetalleNoticia(request, pk):
 
     contexto = {
         'noticias': n,
-        'comentarios': c, 
+        'comentarios': c,
     }
 
     contexto = PanelNoticias(contexto)
@@ -165,35 +166,63 @@ def PanelNoticias(contexto):
 @ajax
 @login_required
 def cargar_comentarios(request, noticia_id):
-    noticia = get_object_or_404(Noticia, id = noticia_id)  
+    noticia = get_object_or_404(Noticia, id=noticia_id)
     contexto = {}
     if request.method == 'POST':
         # Obtener el contenido del comentario desde la solicitud POST
         comentario_contenido = request.POST.get('contenido', '')
-        usuario = request.user.username
+        id_comentario = request.POST.get('id_comentario', '')
+        id_comentario = int(id_comentario) if id_comentario.strip() else 0
+        usuario = request.user
 
         # Verificar si el comentario no está vacío
         if not comentario_contenido:
             return JsonResponse({'error': 'El comentario no puede estar vacío'}, status=400)
 
         # Lógica para crear un comentario en la base de datos
-        Comentario.objects.create(noticia = noticia, usuario = usuario, contenido = comentario_contenido)
-        
+        if id_comentario == 0:
+            Comentario.objects.create(
+                noticia=noticia, usuario=usuario, contenido=comentario_contenido)
+        else:
+            comentario = get_object_or_404(Comentario, id=id_comentario)
+            comentario.contenido=comentario_contenido
+            comentario.save()
+
         c = noticia.comentarios.all()
         contexto = {
-            'comentarios': c, 
-        }    
-        #
-        # Devolver una respuesta JSON con el HTML del nuevo comentario
-        
-        # Renderizar la plantilla de comentario
-        comentario_html = render_to_string('noticias/comentarios.html', contexto)
+            'comentarios': c,
+            'user': usuario
+        }
 
-        # Devolver una respuesta JSON con la plantilla renderizada
-        
+        comentario_html = render_to_string(
+            'noticias/comentarios.html', contexto)
+
         return HttpResponse(comentario_html)
     return JsonResponse({'error': 'Solicitud no válida'}, status=400)
-    
-    
-   
 
+
+@ajax
+@login_required
+def eliminar_comentarios(request, id_comentario):
+    comentario = get_object_or_404(Comentario, id=id_comentario)
+    contexto = {}
+    if request.method == 'GET':
+        # Obtener el contenido del comentario desde la solicitud POST
+
+        usuario = request.user
+        id = comentario.noticia.pk
+        if comentario.usuario == request.user:
+            comentario.delete()
+
+        noticia = get_object_or_404(Noticia, id=id)  
+        c = noticia.comentarios.all()
+        contexto = {
+            'comentarios': c,
+            'user': usuario
+        }
+
+        comentario_html = render_to_string(
+            'noticias/comentarios.html', contexto)
+
+        return HttpResponse(comentario_html)
+    return JsonResponse({'error': 'Solicitud no válida'}, status=400)

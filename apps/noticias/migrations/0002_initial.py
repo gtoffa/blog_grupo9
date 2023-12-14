@@ -24,10 +24,5 @@ class Migration(migrations.Migration):
             model_name='noticia',
             name='categoria_noticia',
             field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='noticias.categoria'),
-        ),
-        migrations.AddField(
-            model_name='comentario',
-            name='noticia',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comentarios', to='noticias.noticia'),
-        ),
+        )
     ]

@@ -1,16 +1,48 @@
 {% for comment in comentarios %}
 
-<div class="comment">
+<div class="comment" id="comment{{comment.pk}}">
   <div class="comment_write">
     <div class="icon_comment">
-      <i class="far fa-user user_icon"></i>
-
+      <img
+        class="written_img"
+        style="height: 50px"
+        src="{{comment.usuario.imagenes.url}}"
+        alt=""
+      />
       <div class="icon_text">
         <h1 class="main_written font">{{comment.usuario}}</h1>
         <p class="date margin_days text-black">{{comment.fecha_creacion}}</p>
+
+        <p class="sub-heading mt-1" id="sub-heading-{{comment.pk}}">{{comment.contenido}}</p>
+        
       </div>
     </div>
-    <p class="sub-heading mt-1">{{comment.contenido}}</p>
+    {% if comment.usuario == user %}
+    <div class="container">
+      <div class="row justify-content-end">
+        <button style="    color: gray;"
+          type="button"
+          class="btn btn btn-link editComment "
+          data-idcomment="{{comment.pk}}"
+        >
+          Editar
+        </button>
+
+        {% endif %} {% if comment.usuario == user %}
+
+        <button
+          type="button" style="color: brown;"
+          class="btn btn btn-link confirmDelete"
+          data-toggle="modal"
+          data-target="#confirmModal"
+          data-idcomment="{{comment.pk}}"
+        >
+          Eliminar
+        </button>
+      </div>
+    </div>
+    {% endif %}
+    <hr />
   </div>
 </div>
 {% endfor %}
