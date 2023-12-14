@@ -24,8 +24,7 @@ jobs:
         ports: ['3306:3306']
       run: >
         sudo /etc/init.d/mysql start
-
-        mysql -e 'CREATE DATABASE blog_grupo9;'
+        mysql 'CREATE DATABASE blog_grupo9;'
         -u$ root
         -p$ root
 
