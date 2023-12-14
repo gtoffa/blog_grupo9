@@ -24,7 +24,6 @@ jobs:
             MYSQL_DATABASE: blog_grupo9
         ports:
           - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
       
     steps:
@@ -37,7 +36,7 @@ jobs:
     - name: Set up database
       run: |
         sudo /etc/init.d/mysql start
-        mysql -h localhost -u root -p root -e "CREATE DATABASE IF NOT EXISTS blog_grupo9;"
+        mysql -u root -p root -e "CREATE DATABASE IF NOT EXISTS blog_grupo9;"
 
     - name: Install Dependencies
       run: |
