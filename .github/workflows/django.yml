@@ -27,8 +27,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Check MySQL status
-      run: docker exec -it mysql mysqladmin ping -h localhost -u root -p root
     - name: Install Ubuntu dependencies
       run: |
           sudo apt-get update
