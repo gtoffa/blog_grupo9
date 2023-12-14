@@ -44,7 +44,7 @@ jobs:
             dockerize -wait tcp://localhost:3306 -timeout 2m
     - name: Set up database
       run: |
-        mysql -h mysql -u root -proot -e "CREATE DATABASE IF NOT EXISTS blog_grupo9;"
+        mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE IF NOT EXISTS blog_grupo9;"
 
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
