@@ -35,7 +35,7 @@ jobs:
       
     - name: Set up database
       run: |
-        mysql -u root -proot -e "CREATE DATABASE IF NOT EXISTS blog_grupo9;"
+        mysql -u root -p root -e "CREATE DATABASE IF NOT EXISTS blog_grupo9;"
 
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
