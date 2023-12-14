@@ -35,6 +35,7 @@ jobs:
 
     - name: Set up database
       run: |
+        sudo /etc/init.d/mysql start
         mysql -h localhost -u root -p"${{ secrets.MYSQL_ROOT_PASSWORD }}" -e "CREATE DATABASE IF NOT EXISTS blog_grupo9;"
 
     - name: Install Dependencies
