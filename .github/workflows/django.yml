@@ -23,7 +23,7 @@ jobs:
             MYSQL_DATABASE: blog_grupo9
         ports:
           - 3306:3306
-        options: --tmpfs /var/lib/mysql
+
 
     steps:
     - uses: actions/checkout@v3
