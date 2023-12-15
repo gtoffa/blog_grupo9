@@ -57,11 +57,11 @@
     </div>
   </section>
   {% if comment.usuario == user or user.is_staff %}
-  <button class="btn btn-info boton-flotante">
+  <a href="{% url 'noticias:edit_noticia' pk=noticias.pk %}" class="btn btn-info boton-flotante">
     Editar artículo
 
     <i class="las la-pen"></i>
-  </button>
+  </a>
   {% endif %}
   <!--  START FOOTER SECTION  -->
   <section id="footer" class="footer">

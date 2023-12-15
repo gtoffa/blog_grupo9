@@ -1,11 +1,13 @@
 from django.shortcuts import get_object_or_404, render, redirect
+
+from apps.noticias.forms import NoticiaForm
 from .models import Noticia, Categoria, Comentario
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count, Q
 from django.db.models.functions import TruncYear, TruncMonth
 from django.urls import reverse
 from datetime import datetime
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django_ajax.decorators import ajax
 from django.views.generic import TemplateView
@@ -226,3 +228,40 @@ def eliminar_comentarios(request, id_comentario):
 
         return HttpResponse(comentario_html)
     return JsonResponse({'error': 'Solicitud no válida'}, status=400)
+
+
+@login_required
+def AddNoticia(request):
+    if request.method == 'POST':
+        form = NoticiaForm(request.POST or None, request.FILES) ##Request files es para las imagenes
+
+        if form.is_valid():
+            noticia = form.save(commit=False)
+            noticia.autor = request.user
+            form.save()
+            return redirect('home')
+    else:
+        form = NoticiaForm()
+    
+    return render (request, 'noticias/addNoticia.html', {'form':form})
+
+@login_required
+def EditarNoticia(request, pk):
+    noticia = get_object_or_404(Noticia, pk=pk)
+
+    # Solo el autor puede editar la noticia
+    if noticia.autor != request.user:
+        return HttpResponseForbidden("No tenes permiso para editar esta noticia.")
+
+    if request.method == 'POST':
+        form = NoticiaForm(request.POST, request.FILES, instance=noticia)
+        if form.is_valid():
+            form.save()
+            return redirect('noticias:detalle', pk=pk)
+    else:
+        form = NoticiaForm(instance=noticia)
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'noticias/editar.html', context)
