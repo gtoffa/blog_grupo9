@@ -28,7 +28,7 @@
           Editar
         </button>
 
-        {% endif %} {% if comment.usuario == user %}
+        {% endif %} {% if comment.usuario == user or user.is_staff %}
 
         <button
           type="button" style="color: brown;"
