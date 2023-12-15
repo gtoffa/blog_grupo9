@@ -74,38 +74,53 @@ function setearFuncionClick() {
     $("#confirmDeleteBtn").data("idcomment", idcomment);
     //$("#confirmDeleteBtn").attr("idcomment", idcomment)
   });
+}
+function editComment(idcomment) {
+  var idComentario = idcomment;
 
-  $(".editComment").on("click", function () {
-    var idComentario = $(this).data("idcomment");
+  var comentarioClonado = $("#comment" + idComentario).clone();
+  var formularioClonado = $("#formulario-comentario").clone();
 
-    var formularioClonado = $("#formulario-comentario").clone();
+  var cancelEditComment = $(
+    "<a   href='javascript:void(0);' style='position: absolute;margin-top: -30px;padding: 10px;text-decoration-line: blink;'>Cancelar</a>"
+  );
 
-    // Modificar atributos según necesidades
-    formularioClonado.attr("id", "formulario-comentario" + idComentario);
-    formularioClonado
-      .find("#commenTextArea")
-      .val($("#sub-heading-" + idComentario).text());
-    formularioClonado
-      .find("#commenTextArea")
-      .attr("id", "commenTextArea" + idComentario);
-    formularioClonado
-      .find("#enviar-comentario")
-      .attr("onclick", "enviarComentario(" + idComentario + ")");
-    formularioClonado
-      .find("#enviar-comentario")
-      .attr("id", "enviar-comentario" + idComentario);
+  // Manejar el evento de clic en el enlace
+  cancelEditComment.on("click", function () {
+    // Establecer el contenido HTML del elemento con el id "comment" + idComentario
 
-    formularioClonado
-      .find("#comentario-error")
-      .attr("id", "comentario-error" + idComentario);
-
-    formularioClonado.find("#loading").attr("id", "loading" + idComentario);
-
-    formularioClonado.find("#loading").attr("id", "loading" + idComentario);
-
-    // Agregar el formulario clonado al contenedor
-    $("#comment" + idComentario).html(formularioClonado);
+    $("#comment" + idComentario).html(comentarioClonado);
   });
+
+  // Modificar atributos según necesidades
+  formularioClonado.attr("id", "formulario-comentario" + idComentario);
+  formularioClonado
+    .find("#commenTextArea")
+    .after(cancelEditComment)
+    .val($("#sub-heading-" + idComentario).text());
+  formularioClonado
+    .find("#commenTextArea")
+    .attr("id", "commenTextArea" + idComentario);
+  formularioClonado
+    .find("#enviar-comentario")
+    .after("<hr/>")
+    .attr("onclick", "enviarComentario(" + idComentario + ")");
+  
+  formularioClonado
+    .find("#enviar-comentario")
+    .attr("style", "margin-top: 20px;")
+    .attr("id", "enviar-comentario" + idComentario);
+
+  formularioClonado
+    .find("#comentario-error")
+    .attr("id", "comentario-error" + idComentario);
+
+  formularioClonado.find("#loading").attr("id", "loading" + idComentario);
+
+  formularioClonado.find("#loading").attr("id", "loading" + idComentario);
+
+  // Agregar el formulario clonado al contenedor
+  $("#comment" + idComentario).html(formularioClonado);
 }
 
 function enviarComentario(id_comentario) {

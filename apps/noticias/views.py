@@ -211,7 +211,7 @@ def eliminar_comentarios(request, id_comentario):
 
         usuario = request.user
         id = comentario.noticia.pk
-        if comentario.usuario == request.user:
+        if comentario.usuario == request.user or usuario.is_staff:
             comentario.delete()
 
         noticia = get_object_or_404(Noticia, id=id)  

@@ -1,10 +1,14 @@
-{% extends 'base.html' %} 
-{% load static %} 
-{% block contenido %} 
+{% extends 'base.html' %}
+{% load static %}
+{% block contenido %}
 {% include "navbar.html" %}
-<div id="page_content" idNoticia={{noticias.id}}>
+<div id="page_content" idNoticia="{{noticias.id}}">
   <!--HEADER IMAGE-->
-  <section id="bg-blog-detail-img" class="bg-blog-detail-img">
+  <section
+    id="bg-blog-detail-img"
+    style="background-image: url({{noticias.imagenes.url}});"
+    class="bg-blog-detail-img"
+  >
     <div class="overlay"></div>
   </section>
 
@@ -41,9 +45,8 @@
           <h1 class="comment_text text-black mt-6 mb-5">
             ESCRIBIR UN COMENTARIO
           </h1>
-           
-          {% include "./formcomentario.html" %}
-          {% else %}
+
+          {% include "./formcomentario.html" %} {% else %}
           <h4 class="comment_text text-black mt-6 mb-5">
             Registrarte para escribir un comentario
           </h4>
@@ -53,7 +56,13 @@
       </div>
     </div>
   </section>
+  {% if comment.usuario == user or user.is_staff %}
+  <button class="btn btn-info boton-flotante">
+    Editar artículo
 
+    <i class="las la-pen"></i>
+  </button>
+  {% endif %}
   <!--  START FOOTER SECTION  -->
   <section id="footer" class="footer">
     <div class="container">
@@ -129,5 +138,4 @@
   </div>
 </div>
 
- 
 {% endblock contenido %}

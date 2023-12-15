@@ -39,3 +39,17 @@
   object-fit: cover!important; /* Ajusta el tamaño de la imagen manteniendo su relación de aspecto y cubriendo el contenedor */
  
 }
+
+
+.boton-flotante {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
