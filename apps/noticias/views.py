@@ -56,6 +56,8 @@ def ListarNoticias(request):
             n = n.order_by('fecha_publicacion')
         elif antiguedad == "desc":
             n = n.order_by('-fecha_publicacion')
+    else:
+        n = n.order_by('-fecha_publicacion')
 
     if orden:
         if orden == "asc":
@@ -122,6 +124,7 @@ def DetalleNoticia(request, pk):
     id_categoria = request.GET.get("id", None)
     archivo = request.GET.get("archivo", None)
     redirect_url = reverse('noticias:listar')
+    
     if id_categoria is not None:
         redirect_url += f'?id={id_categoria}'
         return redirect(redirect_url)
@@ -239,7 +242,8 @@ def AddNoticia(request):
             noticia = form.save(commit=False)
             noticia.autor = request.user
             form.save()
-            return redirect('home')
+            redirect_url = reverse('noticias:listar')
+            return redirect(redirect_url) 
     else:
         form = NoticiaForm()
     

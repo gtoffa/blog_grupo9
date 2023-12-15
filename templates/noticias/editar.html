@@ -1,10 +1,11 @@
 {% extends 'base.html' %} {% load static %} 
 {% block contenido %} 
 {% include "navbar.html" %}
+{% load crispy_forms_tags %}
 <div id="page_content">
   <section
     id="bg-blog-detail-img"
-    style="background-image: url({{noticias.imagenes.url}});"
+    style="background-image: url({{ form.instance.imagenes.url }});"
     class="bg-blog-detail-img"
   >
     <div class="overlay"></div>
@@ -12,7 +13,7 @@
   <section id="search">
     <div class="container">
       <div class="row pt-lg-5">
-        <div class="col-sm-12 col-ms-8 col-lg-8">
+        <div class="col-sm-12 col-ms-12 col-lg-12">
           <h2>Editar Noticia</h2>
           <hr />
           <form
@@ -22,10 +23,9 @@
             enctype="multipart/form-data"
           >
             {% csrf_token %} 
-            {% for field in form %}
-            <div class="form-group">{{ field }}</div>
-            {% endfor %}
-            <button type="submit">Guardar cambios</button>
+            {{ form.media }}
+            {% crispy form %}
+            <button class="btn btn-info boton-flotante" type="submit">Guardar cambios</button>
           </form>
         </div>
       </div>
@@ -40,4 +40,6 @@
   type="text/javascript"
   src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"
 ></script>
+
+ 
 {% endblock contenido %}

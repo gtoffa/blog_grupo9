@@ -44,11 +44,22 @@ INSTALLED_APPS = [
     'apps.home',
     'apps.contacto',
     'ckeditor',
-    'django_ajax'
+    'django_ajax',
+    'crispy_forms',
+    'crispy_bootstrap4',
 ]
 
 
 CKEDITOR_UPLOAD_PATH = "media/uploads/"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'height': '500', 
+        'width': 'full', 
+    },
+}
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

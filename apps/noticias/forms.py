@@ -1,10 +1,11 @@
 from django import forms
 from .models import Noticia
-from ckeditor.widgets import CKEditorWidget
-
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, Submit, HTML
+from django.forms import ImageField, FileInput
 
 class NoticiaForm(forms.ModelForm):
-
+    imagenes = ImageField(widget=FileInput,label="Nueva Imagen")
     class Meta:
         model = Noticia
         fields = [
@@ -14,14 +15,37 @@ class NoticiaForm(forms.ModelForm):
             'imagenes',
             'categoria_noticia',
         ]
+        widgets = {
+            'titulo': forms.TextInput(),
+            'resumen': forms.Textarea(),
+            'categoria_noticia': forms.Select(attrs={'class': 'form-control'}),
+            'imagenes': forms.ClearableFileInput(attrs={'class': 'form-control', 'label': 'Nueva Etiqueta'}),
+        }
 
 
- 
-
-widgets = {
-
-    'titulo': forms.TextInput(attrs={'class': 'form-control'}),
-    'resumen': forms.Textarea(attrs={'class': 'form-control'}),
-    'imagenes': forms.ClearableFileInput(attrs={'class': 'form-control'}),
-    'categoria_noticia': forms.Select(attrs={'class': 'form-control'}),
-}
+    def __init__(self, *args, **kwargs):
+        super(NoticiaForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_class = 'form-group'
+        self.helper.form_tag = False
+        self.helper.disable_csrf = True
+        self.helper.layout = Layout(
+            'titulo',
+            'resumen',
+            'categoria_noticia',
+            HTML("""
+                {% if form.instance.imagenes %}
+                <label for="id_resumen" class=" requiredField">
+                Imagen asociada<span class="asteriskField">*</span> </label>
+                    <div>
+                        <img style="max-width: 500px;" class=" rounded mx-auto d-block img-thumbnail" src="{{ form.instance.imagenes.url }}">
+                         
+                    </div>
+                    <br/>
+                {% endif %}
+                  
+              
+            """),
+            'imagenes',
+            'contenido',
+        )
