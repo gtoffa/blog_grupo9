@@ -42,7 +42,24 @@ INSTALLED_APPS = [
     'apps.usuarios',
     'apps.noticias',
     'apps.home',
+    'apps.contacto',
+    'ckeditor',
+    'django_ajax',
+    'crispy_forms',
+    'crispy_bootstrap4',
 ]
+
+
+CKEDITOR_UPLOAD_PATH = "media/uploads/"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'height': '500', 
+        'width': 'full', 
+    },
+}
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -52,6 +69,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',    
+    'apps.noticias.middleware.CurrentUserMiddleware',
 ]
 
 ROOT_URLCONF = 'blog.urls'

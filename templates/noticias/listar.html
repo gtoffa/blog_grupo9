@@ -1,22 +1,180 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block titulo %}Noticias{% endblock titulo %}
-{% block contenido %}
-    <h2>aca estan mis noticias !</h2>
-    <div class="submenu">
-        <a href="{% url 'noticias:listar'%}">TODAS</a>
-        {% for cat in categorias %}
-            <a href="?id={{cat.pk}}">{{cat.nombre}}</a>
-        {% endfor %}
-        <a href="?antiguedad_asc=A">Mas antiguas primero</a>
-        <a href="?antiguedad_desc=D">Mas recientes primero</a>
-        <a href="?orden_asc=1">A - Z</a>
-        <a href="?orden_desc=1">Z - A</a>
-    </div>
-    {% for noticia in noticias %}
-        <h3><a href="{% url 'noticias:detalle' noticia.pk %}">Titulo: {{noticia.titulo}}</a></h3>
-        <img src="{{noticia.imagenes.url}}" width="10%">
-        <br>
-    {% endfor %}
+{% extends 'base.html' %} 
+{% load static %} 
+{% block contenido %} 
+{% include "navbar.html" %}
 
+<div id="page_content">
+  
+  {% if comment.usuario == user or user.is_staff %}
+  <a href="{% url 'noticias:addnoticia' %}" class="btn btn-success boton-flotante">
+    Nuevo artículo
+
+    <i class="las la-plus"></i>
+  </a>
+  {% endif %}
+    
+  <section id="bg-top-stories-img" class="bg-top-stories-img">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row" style="height: 350px">
+        <div class="col-12 align-items-center container" style="top: 40%">
+          <h1
+            class="main-heading text-white"
+            style="font-size: 100px; text-align: center"
+          >
+          Blog
+          </h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="search">
+    <div class="container">
+      <div class="row pt-sm-5">
+        {% include "./panel_noticias.html" %}
+
+        <div
+          class="col-sm-12 col-md-12 col-lg-8 pt-sm-4 pt-md-0 pt-lg-0   order-md-2" >
+          <ul class="nav justify-content-end">
+           
+            <li class="nav-item">
+              
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <a type="button" style="text-decoration: auto;" class="btn {% if orden %}btn-dark{% else %}btn-outline-dark{% endif %}" href="?orden={% if orden  == 'asc' %}desc{% else %}asc{% endif %}{% if categoria_select %}&id={{ categoria_select.pk }}{% endif %}{% if buscar %}&buscar={{ buscar }}{% endif %}{% if archivo %}&archivo={{ archivo }}{% endif %}"  >
+                  Orden
+                  {% if orden is None %}
+                      <i class="las la-sort-alpha-down"></i>
+                  {% elif orden  == 'asc' %}
+                      <i class="las la-sort-alpha-down"></i>
+                  
+                  {% else %}
+                      <i class="las la-sort-alpha-up-alt"></i>
+                  {% endif %}
+                </a>
+                <a type="button" style="text-decoration: auto;" class="btn {% if antiguedad %}btn-dark{% else %}btn-outline-dark{% endif %}"   href="?antiguedad={% if antiguedad  == 'asc' %}desc{% else %}asc{% endif %}{% if categoria_select %}&id={{ categoria_select.pk }}{% endif %} {% if buscar %}&buscar={{ buscar }}{% endif %}"  >Fecha  
+                  {% if antiguedad is None %}
+                     <i class="las la-sort-amount-up"></i>
+                  {% elif antiguedad  == 'asc'  %}
+                     <i class="las la-sort-amount-down-alt"></i>
+                  {% else %}
+                     <i class="las la-sort-amount-up"></i>
+                  {% endif %}
+            
+                  
+                </a>
+
+              </div>
+              
+            </li>
+          </ul>
+           
+          {%if fecha_objeto %}
+            <h4> {{ fecha_objeto|date:'F Y'|capfirst }}<a href="?{% if categoria_select %}&id={{ categoria_select.pk }}{% endif %}{% if orden %}&orden={{ orden }}{% endif %}{% if antiguedad %}&antiguedad={{ antiguedad }}{% endif %}{% if buscar %}&buscar={{ buscar }}{% endif %}" class="badge badge"><i class="las la-times"></i></a></h4>
+            
+          {%endif%}
+          <!--..................MINIMAL POST....-->
+          {% for noticia in registros %}
+          <div class="minimal_image   mt-10">
+            <section class="min-post">
+              <img src="{{noticia.imagenes.url}}" alt="Blog Image" />
+            </section>
+          </div>
+          <div class="text_minimal">
+            <a
+              class="text-black"
+              href="{% url 'noticias:detalle' noticia.pk %}"
+            >
+              <h2>{{noticia.titulo}}</h2>
+            </a>
+            <div class="display">
+              <p class="date text-black">{{noticia.fecha_publicacion}}</p>
+              <div class="verticle_line margin_1 bg-black"></div>
+              <span>{{noticia.autor}}</span>
+              <div class="verticle_line margin_1 bg-black"></div>
+              <span>{{noticia.categoria_noticia}}</span>
+            </div>
+            <p class="sub-heading text-grey">
+                {{noticia.resumen}}
+                ...</p>
+            <a
+              href="{% url 'noticias:detalle' noticia.pk %}"
+              class="btn btn-large btn-primary"
+              >Leer Más</a
+            >
+          </div>
+          <div class="divider1"></div>
+          {% endfor %}
+          
+          
+          
+          <!--..........PAGINATION..........-->
+          <ul class="pagination mt-10">
+            {% if registros.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page=1{% if categoria_select %}&id={{ categoria_select.pk }}{% endif %}{% if orden %}&orden={{ orden }}{% endif %}{% if antiguedad %}&antiguedad={{ antiguedad }}{% endif %}{% if buscar %}&buscar={{ buscar }}{% endif %}{% if archivo %}&archivo={{ archivo }}{% endif %}">&laquo; Primero</a>
+            </li>
+            <li class="page-item">
+              <a
+                class="page-link"
+                href="?page={{ registros.previous_page_number }}{% if categoria_select %}&id={{ categoria_select.pk }}{% endif %}{% if orden %}&orden={{ orden }}{% endif %}{% if antiguedad %}&antiguedad={{ antiguedad }}{% endif %}{% if buscar %}&buscar={{ buscar }}{% endif %}{% if archivo %}&archivo={{ archivo }}{% endif %}"
+                ><i class="fas fa-arrow-left"></i></a
+              >
+            </li>
+            {% endif %} 
+            {% for i in registros.paginator.page_range %}
+                {% if registros.number == i %}
+                    <li class="page-item active">
+                        <span class="page-link" >{{ i }} 
+                            <span class="sr-only">(current)</span>
+                        </span>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                      <a class="page-link" href="?page={{ i }}{% if categoria_select %}&id={{ categoria_select.pk }}{% endif %}{% if orden %}&orden={{ orden }}{% endif %}{% if antiguedad %}&antiguedad={{ antiguedad }}{% endif %}{% if buscar %}&buscar={{ buscar }}{% endif %}{% if archivo %}&archivo={{ archivo }}{% endif %}">{{ i }}</a>
+                    </li>
+                {% endif %} 
+            {% endfor %}
+
+            {% if registros.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ registros.next_page_number }}{% if categoria_select %}&id={{ categoria_select.pk }}{% endif %}{% if orden %}&orden={{ orden }}{% endif %}{% if antiguedad %}&antiguedad={{ antiguedad }}{% endif %}{% if buscar %}&buscar={{ buscar }}{% endif %}{% if archivo %}&archivo={{ archivo }}{% endif %}">
+
+                    <i class="fas fa-arrow-right"></i></a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ registros.paginator.num_pages }}{% if categoria_select %}&id={{ categoria_select.pk }}{% endif %}{% if orden %}&orden={{ orden }}{% endif %}{% if antiguedad %}&antiguedad={{ antiguedad }}{% endif %}{% if buscar %}&buscar={{ buscar }}{% endif %}{% if archivo %}&archivo={{ archivo }}{% endif %}">&raquo; Último</a>
+                </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--  START FOOTER SECTION  -->
+  <section id="footer" class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <ul class="footer_ul">
+            <li class="footer_list"><i class="lab la-facebook-f"></i></li>
+            <li class="footer_list"><i class="lab la-twitter"></i></li>
+            <li class="footer_list"><i class="lab la-google-plus"></i></li>
+            <li class="footer_list"><i class="lab la-linkedin-in"></i></li>
+            <li class="footer_list"><i class="lab la-instagram"></i></li>
+            <li class="footer_list"><i class="las la-envelope"></i></li>
+          </ul>
+          <p class="info footer_text">
+            <i class="far fa-copyright"></i>2023 MegaOne. Made with love by
+            themesindustry
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<script>
+  resaltarTexto() 
+</script>
 {% endblock contenido %}

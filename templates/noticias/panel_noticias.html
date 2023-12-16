@@ -1,0 +1,170 @@
+{% load static %}
+ 
+<div class="col-12 col-lg-4 order-2 order-md-1 margin_small">
+  <div class="search_outerbox">
+    <form method="get" action="{% url 'noticias:listar' %}">
+      <div class="input-group">
+        <input
+          type="text"
+          id="buscarInput"
+          name="buscar"
+          value="{% if buscar %}{{ buscar }}{% endif %}"
+          class="form-control"
+          placeholder="Buscar..."
+        />
+       
+        {% if categoria_select %}
+        <input
+        type="hidden"
+        id="buscarInput"
+        name="id"
+        value="{{ categoria_select.pk }}"
+        />
+        {% endif %}
+
+        {% if archivo %}
+        <input
+        type="hidden"
+        id="buscarInput"
+        name="archivo"
+        value="{{ archivo }}"
+        />
+        {% endif %}
+
+        {% if orden %}
+        <input
+        type="hidden"
+        id="buscarInput"
+        name="orden"
+        value="{{ orden }}"
+        />
+        {% endif %}
+        <input
+        type="hidden"
+        id="buscarInput"
+        name="antiguedad"
+        value="{% if antiguedad %}{{ antiguedad }}{% endif %}"
+        />
+
+
+
+
+        {% if buscar %}
+        <span class="input-group-btn">
+          <button id="limpiarBtn" class="btn btn-search" type="button">
+            <i class="fa fa-trash fa-fw"></i>
+          </button>
+        </span>
+        {% endif %}
+
+        <span class="input-group-btn">
+          <button id="buscarBtn" class="btn btn-search" type="submit">
+            <i class="fa fa-search fa-fw"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+
+    <script>
+      try{
+      document
+        .getElementById("limpiarBtn")
+        .addEventListener("click", function () {
+          document.getElementById("buscarInput").value = ""; 
+          document.getElementById("buscarBtn").click(); 
+        });
+      }catch(e){
+
+      }
+
+      
+    </script>
+  </div>
+  <section id="tags">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 pr-0 pl-0">
+          <div class="outer_tag mt-4">
+            <h2 class="main_tag">CATEGORIAS</h2>
+            <div class="inner_tag">
+              <div class="tag_text">
+                {% for cat in categorias %}
+                <span>
+                  {% if categoria_select %}
+                    {% if categoria_select.pk == cat.pk %}
+                       <a class=" btn-search" href="?id={{cat.pk}}{% if buscar %}&buscar={{ buscar }}{% endif %}{% if archivo %}&archivo={{ archivo }}{% endif %}">{{cat.nombre}}</a>
+                    {% else %}
+                       <a  href="?id={{cat.pk}}{% if buscar %}&buscar={{ buscar }}{% endif %}{% if archivo %}&archivo={{ archivo }}{% endif %}">{{cat.nombre}}</a>
+            
+                    {% endif %} 
+                  {% else %}
+                    <a  href="?id={{cat.pk}}{% if buscar %}&buscar={{ buscar }}{% endif %}{% if archivo %}&archivo={{ archivo }}{% endif %}">{{cat.nombre}}</a>
+                  {% endif %} 
+                </span>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="popular_post">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 p-0">
+          <div class="outer_popular mt-4">
+            <h2 class="text-black">Post Populares</h2>
+            {% for noticia in popular_noticias %}
+            <div class="outer mt-4 display">
+              <div class="imagen-container">
+                <a href="{% url 'noticias:detalle' noticia.pk %}"
+                  ><img  
+                    class="imagen-container-img"
+                    src="{{noticia.imagenes.url}}"
+                    alt="{{noticia.titulo}}"
+                /></a>
+              </div>
+              <div class="text_post minimal-post ">
+                <a
+                  href="{% url 'noticias:detalle' noticia.pk %}"
+                  class="main  "
+                  title="{{noticia.titulo}}"
+                  >{{noticia.titulo | slice:22 }}</a
+                >
+                <p class="date">{{noticia.fecha_publicacion}}</p>
+                <span>{{noticia.autor}}</span>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="archieve">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 pr-0 pl-0">
+          <div class="topic_outerbox mt-4">
+            <h2>Archivos</h2>
+            <div class="inner-box1">
+              <ul class="sub-heading">
+                {% for resumen in resumen_noticias %}
+                <li>
+                  <a href="?archivo={{ resumen.month|date:'m-Y' }}{% if categoria_select %}&id={{ categoria_select.pk }}{% endif %}">{{ resumen.month|date:'M Y' }}</a>
+                  <span class="dots">..............</span>
+                  {{ resumen.cant_noticias }}
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+

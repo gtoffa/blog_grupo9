@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% load static %} 
+{% block contenido %} 
+{% include "navbar.html" %}
+{% load crispy_forms_tags %}
+<div id="page_content">
+  <section
+    id="bg-blog-detail-img"
+     
+    class="bg-blog-detail-img"
+  >
+    <div class="overlay"></div>
+  </section>
+  <section id="search">
+    <div class="container">
+      <div class="row pt-lg-5">
+        <div class="col-sm-12 col-ms-12 col-lg-12">
+          <h2>Nueva Noticia</h2>
+          <hr />
+          <form
+            action=""
+            class="post-form"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            {% csrf_token %} 
+            {{ form.media }}
+            {% crispy form %}
+            <button class="btn btn-success boton-flotante" type="submit">Crear Nuevo  <i class="las la-save"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<script
+  type="text/javascript"
+  src="{% static 'ckeditor/ckeditor-init.js' %}"
+></script>
+<script
+  type="text/javascript"
+  src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"
+></script>
+
+ 
+{% endblock contenido %}

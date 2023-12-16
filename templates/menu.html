@@ -1,0 +1,38 @@
+{% load static %}
+<div class="outer-wrapper">
+    <div class="overlay1">
+      <a class="close-outerwindow"><i class="las la-times"></i></a>
+
+      <nav class="navbar-1 w-100">
+        <div class="row text-center">
+          <div class="col-12">
+            <div class="logo-img text-center">
+              <a href="index-blog.html"
+                ><img src="{% static 'img/logo.png'%}" alt="Logo Img"
+              /></a>
+            </div>
+
+            <ul class="navbar-nav mt-5 text-center small-nav">
+              <li class="nav-item">
+                <a class="nav-link active" href="/">Home</a>
+                
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'noticias:listar' %}">Blogs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'contacto:contacto' %}">Contact</a>
+                
+              </li>
+            </ul>
+            <ul class="footer_ul text-center mt-3 margin-top">
+              <li class="footer_list"><i class="lab la-facebook-f"></i></li>
+              <li class="footer_list"><i class="lab la-twitter"></i></li>
+              <li class="footer_list"><i class="lab la-google-plus"></i></li>
+              <li class="footer_list"><i class="lab la-linkedin-in"></i></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
