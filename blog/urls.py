@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('apps.home.urls')),
     path('nosotros/', views.Nosotros, name='nosotros'),
     path('noticias/', include('apps.noticias.urls')),
+    path('usuarios/', include('apps.usuarios.urls')),
     path('contacto/', include('apps.contacto.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     #parametro 1: es el texto de la url

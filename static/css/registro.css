@@ -1,0 +1,58 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1.5rem;
+}
+
+h1{
+    font-size: 1.8rem;
+    color: black;
+    margin-bottom: 1.2rem;
+}
+
+.formulario-registro{
+    width: 450px;
+    padding: 2rem 1rem;
+    margin: 30px auto;
+    background-color: rgb(163, 204, 216);
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 10px 50px -30px black;;
+    overflow: hidden;
+}
+
+form input{
+    width: 100%;
+    border: none;
+    background-color: #e4e4e4;
+    padding: 20px 30px;
+    font-size: 18px;
+    border-radius: 50px;
+    transition: box-shadow .2s;
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px grey;
+    }
+}
+
+button {
+    font-size: 1rem;
+    margin-top: 1.8rem;
+    padding: 10px 0;
+    border-radius: 20px;
+    outline: none;
+    width: 100%;
+    color: #1d1c1c;
+    cursor: pointer;
+    background:  rgb(130, 189, 207);
+
+}

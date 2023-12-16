@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}Login{% endblock titulo %}
+{% block contenido %}
+<link rel="stylesheet" href="{% static 'css/Login.css'%}" />
+<body>
+    <div class="Carta_logueo">
+    <form method="post">{% csrf_token %}
+        <h1>Mi Mundo Viajando</h1>
+        <h2>Iniciar Sesion</h2>
+        <div>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-danger">{{message}}</div>
+            {% endfor %}
+            {% endif %}
+                <div class="form-item"></div>
+                    <input type="text" class="form-element" name="username" placeholder="Usuario">
+                    <i class="bi bi-person-circle"></i>
+                </div>
+                <div class="form-item">
+                    <input type="password" class="form-element" name="password" placeholder="Contraseña">
+                    <i class="bi bi-key-fill"></i>
+                </div>
+            <div class="form-checkbox-item">
+                <input type="checkbox" id="recuerdame" checked>
+                <label for="recuerdame">Recordarme</label>
+            </div>
+            <div class="flex">
+                <button type="submit">Ingresar</button>
+            </div>
+            <div>
+                <div class="column">
+                <p>¿No tienes una cuenta?,<a href="{% url 'usuarios:registro' %}">Crea una ahora</a></p>
+            </div>    
+        </div>
+    </form>
+</body>
+{% endblock contenido %}

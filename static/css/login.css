@@ -1,0 +1,89 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+h1{
+    font-size: 2.5rem;
+    color: rgb(0, 0, 0);
+    margin-bottom: 1.2rem;
+}
+
+h2{
+    font-size: 1.5rem;
+    color: rgb(0, 0, 0);
+    margin-bottom: 1.2rem;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1.5rem;
+}
+.Carta_logueo{
+    width: 420px;
+    padding: 2rem 1rem;
+    margin: 50px auto;
+    background-color: rgb(163, 204, 216);
+    border-radius: 40px;
+    text-align: center;
+    border: lpx solid #ddd ;
+    box-shadow: 0 10px 50px -30px black;;
+    overflow: hidden;
+
+    .form-element {
+        width: 100%;
+        border: none;
+        background-color: #f1f1f1;
+        padding: 20px 30px;
+        font-size: 18px;
+        border-radius: 50px;
+        transition: box-shadow .2s;
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px grey;
+        }
+
+    }
+
+    
+
+    
+
+    form {
+        margin-top: 3rem;
+
+        &>* {
+            margin-top: 1rem;
+        }
+
+        button {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            padding: 10px 0;
+            border-radius: 20px;
+            outline: none;
+            width: 90%;
+            color: rgb(0, 0, 0);
+            cursor: pointer;
+            background:rgb(130, 189, 207);
+
+        }
+  
+
+    }
+}
+
+.bi{
+    font-size: 20px;
+    position: relative;
+    left: 170px;
+    top: -62px;
+    color: grey;
+}
