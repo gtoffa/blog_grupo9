@@ -1,3 +1,4 @@
+import threading
 from django.shortcuts import get_object_or_404, render, redirect
 
 from apps.noticias.forms import NoticiaForm
@@ -13,8 +14,27 @@ from django_ajax.decorators import ajax
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
-# Create your views here.
+ 
+from django.contrib.admin.models import LogEntry
+from django.contrib.contenttypes.models import ContentType
+ 
 
+# Create your views here.
+# Creamos un objeto local enhebrado para almacenar el usuario actual
+thread_local = threading.local()
+
+def get_current_user():
+    return getattr(thread_local, 'user', None)
+
+# Definir una función middleware para establecer el usuario actual en cada solicitud
+class CurrentUserMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        thread_local.user = request.user
+        response = self.get_response(request)
+        return response
 
 def ListarNoticias(request):
     contexto = {}
@@ -252,6 +272,10 @@ def AddNoticia(request):
 @login_required
 def EditarNoticia(request, pk):
     noticia = get_object_or_404(Noticia, pk=pk)
+    content_type = ContentType.objects.get_for_model(noticia)
+    # Obtener las entradas de historial de cambios para tu modelo
+    history_entries = LogEntry.objects.filter(content_type=content_type, object_id = pk).order_by('-action_time')[:10]
+
 
     # Solo el autor puede editar la noticia
     if noticia.autor != request.user:
@@ -267,5 +291,7 @@ def EditarNoticia(request, pk):
 
     context = {
         'form': form,
+        'history':history_entries,
+        'user': request.user
     }
     return render(request, 'noticias/editar.html', context)

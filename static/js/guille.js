@@ -226,3 +226,8 @@ $(document).ready(function () {
 $(document).ready(function () {
   $(".django-ckeditor-widget").css("width", "100%")
 });
+
+
+function goBack() { 
+  window.history.back();
+}

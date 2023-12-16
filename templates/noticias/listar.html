@@ -6,10 +6,10 @@
 <div id="page_content">
   
   {% if comment.usuario == user or user.is_staff %}
-  <a href="{% url 'noticias:addnoticia' %}" class="btn btn-info boton-flotante">
+  <a href="{% url 'noticias:addnoticia' %}" class="btn btn-success boton-flotante">
     Nuevo artículo
 
-    <i class="las la-pen"></i>
+    <i class="las la-plus"></i>
   </a>
   {% endif %}
     

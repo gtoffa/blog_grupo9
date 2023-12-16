@@ -44,14 +44,15 @@
 .boton-flotante {
   position: fixed;
   bottom: 20px;
-  right: 20px; 
+  right: 20px;
   color: #fff !important;
   border: none;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  z-index: 99999;
+  text-decoration-line: blink;
   border-radius: 5px;
 }
-
 
  

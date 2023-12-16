@@ -1,6 +1,7 @@
-{% extends 'base.html' %} {% load static %} 
-{% block contenido %} 
-{% include "navbar.html" %}
+{% extends 'base.html' %}
+{% load static %}
+{% block contenido %}
+{% include "navbar.html" %} 
 {% load crispy_forms_tags %}
 <div id="page_content">
   <section
@@ -13,7 +14,7 @@
   <section id="search">
     <div class="container">
       <div class="row pt-lg-5">
-        <div class="col-sm-12 col-ms-12 col-lg-12">
+        <div class="col-sm-12 col-ms-8 col-lg-8">
           <h2>Editar Noticia</h2>
           <hr />
           <form
@@ -22,11 +23,39 @@
             method="post"
             enctype="multipart/form-data"
           >
-            {% csrf_token %} 
-            {{ form.media }}
-            {% crispy form %}
-            <button class="btn btn-info boton-flotante" type="submit">Guardar cambios</button>
+            {% csrf_token %} {{ form.media }} {% crispy form %}
+            <button class="btn btn-success boton-flotante" type="submit">   
+              Guardar cambios
+              <i class="las la-save"></i>
+            </button>
           </form>
+        </div>
+
+        <div class="col-12 col-lg-4 order-2 order-md-1 margin_small">
+          <section id="tags">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 pr-0 pl-0">
+                  <div class="outer_tag mt-4">
+                    <h2 class="main_tag">Historia de modificaciones</h2>
+                    <ul class="list-group list-group-flush">
+                      {% for entry in history %}
+                        <li class="list-group-item">
+                          <strong>{{entry.action_time}} </strong>
+                          </br>
+                            {{entry.user}}
+                         </br>
+                            {{ entry.get_change_message}}
+                        </li>
+                      {%endfor%}
+                        
+                    </ul>
+                     
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </div>
@@ -41,5 +70,4 @@
   src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"
 ></script>
 
- 
 {% endblock contenido %}
