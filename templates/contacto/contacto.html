@@ -1,12 +1,148 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block titulo %}Contacto{% endblock titulo %}
 {% block contenido %}
-    <h2>Formulario de Contacto</h2>
-    <form method="post" action="{% url 'contacto:contacto' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Enviar</button>
-    </form>
+{% include "navbar.html" %}
+<div id="page_content" idNoticia="{{noticias.id}}">
+  
+  <section
+    id="bg-blog-detail-img"
+    style="White"
+    class="bg-blog-detail-img"
+  >
+    <div class="overlay"></div>
+  </section>
 
+  <div class="text-center">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-center mb-4">Formulario de Contacto</h2>
+                        <form method="post" action="{% url 'contacto:contacto' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                {{ form.as_p }}
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Agrega los enlaces a los scripts de Bootstrap y jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mI1P8Ls3J8kW2IE9cP5bXdaxH3ekCGz3F7PqmgP7b6EGWEF8t22TK8" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy/2EQ6D/XBE5AegjgD5EmnKE2cLmIgxS7" crossorigin="anonymous"></script>
+    
+    </body>
+    </html>
+</div>
+              <div class="written_text">
+                <p class="date text-black"></p>
+                <h1 class="main_written text-black">{{noticias.autor}}</h1>
+              </div>
+            </div>
+          </div>
+          <div id="test"></div>
+          {% if user.is_authenticated %}
+          <h1 class="comment_text text-black mt-6 mb-5">
+            ESCRIBIR UN COMENTARIO
+          </h1>
+
+          {% include "./formcomentario.html" %} {% else %}
+          <h4 class="comment_text text-black mt-6 mb-5">
+            Página de contacto
+          </h4>
+          {% endif %}
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  {% if comment.usuario == user or user.is_staff %}
+  <a href="{% url 'noticias:edit_noticia' pk=noticias.pk %}" class="btn btn-info boton-flotante">
+    Editar artículo
+
+    <i class="las la-pen"></i>
+  </a>
+  {% endif %}
+  <!--  START FOOTER SECTION  -->
+  <section id="footer" class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <ul class="footer_ul">
+            <li class="footer_list"><i class="lab la-facebook-f"></i></li>
+            <li class="footer_list"><i class="lab la-twitter"></i></li>
+            <li class="footer_list"><i class="lab la-google-plus"></i></li>
+            <li class="footer_list"><i class="lab la-linkedin-in"></i></li>
+            <li class="footer_list"><i class="lab la-instagram"></i></li>
+            <li class="footer_list"><i class="las la-envelope"></i></li>
+          </ul>
+          <p class="info footer_text">
+            <i class="far fa-copyright"></i>2023 MegaOne. Made with love by
+            themesindustry
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Modal de confirmación -->
+<div
+  class="modal fade"
+  id="confirmModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="confirmModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmModalLabel">
+          Confirmar Eliminación
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que deseas eliminar este comentario?
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btncomment btn-secondary"
+          data-dismiss="modal"
+        >
+          Cancelar
+        </button>
+        <button
+          type="button"
+          class="btn btncomment btn-danger"
+          id="confirmDeleteBtn"
+        >
+          Eliminar
+        </button>
+        <div
+          id="loading-comment"
+          class="spinner-border text-info d-none"
+          role="status"
+        ></div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
 {% endblock contenido %}
+
