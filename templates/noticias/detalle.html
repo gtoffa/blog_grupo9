@@ -48,7 +48,8 @@
 
           {% include "./formcomentario.html" %} {% else %}
           <h4 class="comment_text text-black mt-6 mb-5">
-            Registrarte para escribir un comentario
+ 
+            <a class="comment_text text-black mt-6 mb-5" style="font-size: 25px;color: cornflowerblue;" href="{% url 'usuarios:login' %}">Iniciar sesion para escribir un comentario</a>
           </h4>
           {% endif %}
         </div>

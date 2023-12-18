@@ -5,19 +5,40 @@
         <div class="row w-100 m-0">
             <div class="col-3 p-0 mt-3 mt-md-4">
                 <ul class="navbar-icons">
-                    <li onclick="goBack()" class="navbar_list"><i class="las la-undo"></i></i></li>
-                    
+                    <li onclick="goBack()" class="navbar_list">
+                        <i class="las la-undo"></i>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="navbar_list2">
+                          <a  class="nav-link dropdown-toggle texto-a-mostrar" href="#" style="color: #2b2b2b;text-decoration: none;" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="las la-user"></i>
+                               
+                          </a>
+                          <a  class="nav-link dropdown-toggle texto-a-ocultar" href="#" style="color: #2b2b2b;text-decoration: none;" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="las la-user"></i>
+                             {{user}} 
+                          </a>
+                          <div style="margin-left: 70px;top: 80%;" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'usuarios:perfil' pk=user.pk %}" style="text-decoration: none;" href="#">Mi Perfil</a>
+                            <div class="dropdown-divider"></div>
+                            <a style="text-decoration: none;" class="dropdown-item" href="{% url 'usuarios:logout' %}">Cerrar sesion</a>
+                          </div>
+                    </li>
+                    {% endif %}
+                     
                 </ul>
+                 
             </div>
-
+            
             <div class="col-6">
                 <div class="logo ml-auto mr-auto width-logo text-center mt-2 mt-md-3">
-                    <a href="index-blog.html"><img src="{% static 'img/logo-white.png'%}" alt="Logo Img"></a>
+                    <a href="index-blog.html"><img src="{% static 'img/logo.png'%}" alt="Logo Img"></a>
                     
                 </div>
             </div>
 
             <div class="col-3 p-0 text-right">
+                
                 <div class="menu-btn mt-3 mt-md-4">
                     <span></span>
                     <span></span>

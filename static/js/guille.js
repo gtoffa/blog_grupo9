@@ -229,5 +229,6 @@ $(document).ready(function () {
 
 
 function goBack() { 
-  window.history.back();
+  window.history.go(-1) 
+  
 }

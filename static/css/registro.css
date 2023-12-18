@@ -2,31 +2,28 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+    font-family:'Montserrat' , sans-serif;
 }
-body{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 1.5rem;
-}
+ 
 
 h1{
-    font-size: 1.8rem;
-    color: black;
+    font-size: 2.5rem;
+    color: rgb(245, 245, 245);
     margin-bottom: 1.2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 10px 50px black;
 }
 
 .formulario-registro{
     width: 450px;
     padding: 2rem 1rem;
     margin: 30px auto;
-    background-color: rgb(163, 204, 216);
+    background-color: rgb(163, 204, 216, 0.5);
     border-radius: 30px;
     text-align: center;
     box-shadow: 0 10px 50px -30px black;;
     overflow: hidden;
+    backdrop-filter: blur(10px); 
 }
 
 form input{
@@ -55,4 +52,15 @@ button {
     cursor: pointer;
     background:  rgb(130, 189, 207);
 
+}
+
+
+.bg-blog-detail-img {
+    background-image: url(../img/testimonial-img.jpg);
+ 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 110vh;
+    padding: 1.5rem;
 }

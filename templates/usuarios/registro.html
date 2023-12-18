@@ -1,25 +1,40 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 {% load static %}
-{% block titulo %}Registro{% endblock titulo %}
 {% block contenido %}
 <link rel="stylesheet" href="{% static 'css/registro.css'%}" />
-<body>
-    <div class="formulario-registro">
-            <h1>Crea tu Cuenta</h1>
-        <form method="post">{% csrf_token %}
-            <input type="text" placeholder="Nombre" required>
-            <input type="text" placeholder="Apellido" required>
-            <input type="text" placeholder="Usuario" required>
-            <input type="password" placeholder="Contraseña" required>
-            <input type="password" placeholder="Confirmar Contraseña" required>
-        </form>
-        <div class="flex">
-            <button type="submit">Crear Cuenta</button>
-        </div>
-        <div>   
-            <div class="column">
-            <p>¿Ya tienes una cuenta? <a href="{% url 'usuarios:login' %}">Ingresa</a></p>
-        </div>   
+
+{% include "navbar.html" %}
+<section
+id="bg-blog-detail-img" 
+class="bg-blog-detail-img"
+style="background-image: url({%static '/img/login.jpg)'%};">
+
+<div class="overlay">
+    <div class="container">
+  <div id="page_content" class="formulario-registro">
+    <h1>Crea tu Cuenta</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %} 
+      {{ form }} 
+      {% if messages %} {% for message in messages%}
+      <div class="alert alert-danger">{{ message }}</div>
+      {% endfor %} 
+      {% endif %}
+      <div class="flex">
+        <button type="submit">Crear Cuenta</button>
+      </div>
+    </form>
+    <div>
+      <div class="column">
+        <p>
+          ¿Ya tienes una cuenta?
+          <a href="{% url 'usuarios:login' %}">Ingresa</a>
+        </p>
+      </div>
     </div>
-</body>
+  </div>
+</div>
+</div>
+  </div>
+</section>
 {% endblock contenido %}

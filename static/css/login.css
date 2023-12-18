@@ -3,39 +3,36 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family:'Poppins', sans-serif;
+    font-family:'Montserrat' , sans-serif;
 }
 
 h1{
     font-size: 2.5rem;
-    color: rgb(0, 0, 0);
+    color: rgb(245, 245, 245);
     margin-bottom: 1.2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 10px 50px black;
 }
 
 h2{
     font-size: 1.5rem;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     margin-bottom: 1.2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 1.5rem;
-}
+ 
 .Carta_logueo{
     width: 420px;
     padding: 2rem 1rem;
     margin: 50px auto;
-    background-color: rgb(163, 204, 216);
+    background-color: rgb(163, 204, 216, 0.5);
     border-radius: 40px;
     text-align: center;
     border: lpx solid #ddd ;
     box-shadow: 0 10px 50px -30px black;;
     overflow: hidden;
-
+    backdrop-filter: blur(10px); 
     .form-element {
         width: 100%;
         border: none;
@@ -86,4 +83,15 @@ body {
     left: 170px;
     top: -62px;
     color: grey;
+}
+
+
+.bg-blog-detail-img {
+    background-image: url(../img/testimonial-img.jpg);
+ 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 110vh;
+    padding: 1.5rem;
 }
