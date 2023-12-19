@@ -55,7 +55,7 @@ class RegistroForm(UserCreationForm):
 
 class PerfilForm(UserChangeForm):
     imagenes = ImageField(widget=FileInput, label="Nueva Imagen")
-    password = forms.CharField(required=False, widget=forms.PasswordInput)
+    
 
     # imagen = forms.ImageField(label='Imagen de perfil', required=False)
 
@@ -79,8 +79,7 @@ class PerfilForm(UserChangeForm):
         self.helper.layout = Layout(
             'email',
             'first_name',
-            'last_name',
-            'password'
+            'last_name', 
             'imagenes',
             HTML("""
                 {% if form.instance.imagenes %}

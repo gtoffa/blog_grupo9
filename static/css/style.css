@@ -368,7 +368,7 @@ a:hover{
     top: 0;
     left:0;
     right:0;
-    overflow: hidden;
+    /*overflow: hidden;*/
     background-color: #fff !important;
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,.50);
     box-shadow: 0 0 10px rgba(0,0,0,.50);

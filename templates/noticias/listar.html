@@ -5,7 +5,7 @@
 
 <div id="page_content">
   
-  {% if comment.usuario == user or user.is_staff %}
+  {% if user.is_staff %}
   <a href="{% url 'noticias:addnoticia' %}" class="btn btn-success boton-flotante">
     Nuevo artículo
 

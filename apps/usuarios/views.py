@@ -7,6 +7,7 @@ from apps.usuarios.models import Usuario
 from .forms import PerfilForm, RegistroForm
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+from ..noticias.models import Noticia , Comentario
 # LOGIN
 
 
@@ -47,12 +48,16 @@ def Perfil(request, pk):
     if user != request.user:
         return HttpResponseForbidden("No tienes permiso para editar este perfil.")
 
+
+
+    
+    
+    n = Noticia.objects.filter(autor=user).all().order_by('-fecha_publicacion')[:5]
+    c = Comentario.objects.filter(usuario=user).all().order_by('-fecha_creacion')[:5]
     if request.method == 'POST':
         form = PerfilForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
-            # Si la contraseña está vacía, eliminar el campo del diccionario antes de guardar
-            if not form.cleaned_data['password']:
-                del form.cleaned_data['password']
+            
             form.save()
             return redirect('noticias:listar')
     else:
@@ -60,6 +65,8 @@ def Perfil(request, pk):
 
     context = {
         'form': form,
-        'user': user
+        'user': request.user,
+        'posteos':n,
+        'comentarios':c,
     }
     return render(request, 'usuarios/perfil.html', context)

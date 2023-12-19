@@ -57,7 +57,7 @@
       </div>
     </div>
   </section>
-  {% if comment.usuario == user or user.is_staff %}
+  {% if   user.is_staff %}
   <a href="{% url 'noticias:edit_noticia' pk=noticias.pk %}" class="btn btn-info boton-flotante">
     Editar artículo
 
