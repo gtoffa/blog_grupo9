@@ -86,7 +86,7 @@ def ListarNoticias(request):
             n = n.order_by('-titulo')
 
     # Crear un objeto Paginator
-    registros_por_pagina = 10
+    registros_por_pagina = 3
     paginator = Paginator(n, registros_por_pagina)
     # Obtener el número de página desde la solicitud GET
 
