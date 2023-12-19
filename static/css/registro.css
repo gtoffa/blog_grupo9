@@ -18,7 +18,7 @@ h1{
     width: 450px;
     padding: 2rem 1rem;
     margin: 30px auto;
-    background-color: rgb(163, 204, 216, 0.5);
+    background-color: rgba(221, 213, 134, 0.35);
     border-radius: 30px;
     text-align: center;
     box-shadow: 0 10px 50px -30px black;;
@@ -45,18 +45,24 @@ button {
     font-size: 1rem;
     margin-top: 1.8rem;
     padding: 10px 0;
+    border: none;
     border-radius: 20px;
     outline: none;
     width: 100%;
     color: #1d1c1c;
     cursor: pointer;
-    background:  rgb(130, 189, 207);
+    background:  rgba(240, 225, 158, 0.77);
+    transition: all .4s;
 
+    &:active{
+        scale: .95;
+        background-color:rgba(240, 210, 90, 0.77) ;
+    }
 }
 
 
 .bg-blog-detail-img {
-    background-image: url(../img/testimonial-img.jpg);
+    background-image: url(../img/slider5.jpg);
  
     display: flex;
     align-items: center;
