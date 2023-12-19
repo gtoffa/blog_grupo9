@@ -26,7 +26,7 @@ urlpatterns = [
     path('nosotros/', views.Nosotros, name='nosotros'),
     path('noticias/', include('apps.noticias.urls')),
     path('usuarios/', include('apps.usuarios.urls')),
-    path('contacto/', include('apps.contacto.urls')),
+    path('acercade/', include('apps.acercade.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     #parametro 1: es el texto de la url
     #parametro 2: la vista que se va a ejecutar

@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'apps.usuarios',
     'apps.noticias',
     'apps.home',
-    'apps.contacto',
+    'apps.acercade',
     'ckeditor',
     'django_ajax',
     'crispy_forms',
