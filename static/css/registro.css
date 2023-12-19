@@ -54,6 +54,12 @@ button {
     background:  rgba(240, 225, 158, 0.77);
     transition: all .4s;
 
+    &:hover{
+        background-color: rgb(240, 210, 90);
+        box-shadow: 0 0 10px rgb(220, 200, 150);
+        color: rgb(0, 0, 0);
+    }
+
     &:active{
         scale: .95;
         background-color:rgba(240, 210, 90, 0.77) ;
