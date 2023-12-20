@@ -1,10 +1,18 @@
 .truncate {
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 4; /* Muestra solo 3 líneas */
+    -webkit-line-clamp: 4;  
     -webkit-box-orient: vertical;
   }
-
+  .texto-con-tres-lineas {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;  
+    -webkit-box-orient: vertical;
+    font-size: 19px !important; 
+    min-height: 87px; 
+    max-height: 89px; 
+}
   .minimal-post {
     max-width: 150px;  
     overflow: hidden; 
@@ -15,8 +23,9 @@
   /* Otras propiedades opcionales para mejorar la apariencia */
   .minimal-post a {
       
-    text-decoration: none; /* Elimina la decoración de subrayado del enlace */
-    text-decoration: none; /* E
+    text-decoration: none !important; /* Elimina la decoración de subrayado del enlace */
+    text-decoration: none!important;  
+    color: #352900 !important;
   }
   
   .minimal-post a:hover {
@@ -84,4 +93,28 @@
 
 .contenedor img {
   margin: auto;
+}
+
+
+.btn-outline-dark {
+  color: #493701;
+  border-color: #493701;
+}
+
+.btn-outline-dark:hover {
+  color: #ffffff;
+  background-color: #ffae0b;
+  border-color: #493701;
+}
+
+.btn-dark {
+  color: #343a40;
+  background-color: #ffae0b;
+  border-color: #493701;
+}
+
+.btn-dark:hover {
+  color: #ffffff;
+  background-color: #ffae0b;
+  border-color: #493701;
 }

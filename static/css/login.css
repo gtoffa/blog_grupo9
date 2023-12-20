@@ -11,7 +11,6 @@ h1{
     color: rgb(245, 245, 245);
     margin-bottom: 1.2rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    text-shadow: 0 10px 50px black;
 }
 
 h2{
@@ -26,7 +25,7 @@ h2{
     width: 420px;
     padding: 2rem 1rem;
     margin: 50px auto;
-    background-color: rgba(221, 213, 134, 0.35);
+    background-color: rgba(255, 255, 255, 0.55);
     border-radius: 40px;
     text-align: center;
     border: lpx solid #ddd ;
@@ -70,18 +69,18 @@ h2{
             width: 90%;
             color: rgb(0, 0, 0);
             cursor: pointer;
-            background:rgba(240, 225, 158, 0.77);
+            background:rgba(255, 255, 255, 0.77);
             transition: all .4s;
 
             &:hover{
-                background-color: rgb(240, 210, 90);
-                box-shadow: 0 0 10px rgb(220, 200, 150);
+                background-color: rgb(0 192 250);
+                box-shadow: 0 0 10px rgb(150, 200, 220);
                 color: rgb(0, 0, 0);
             }
 
             &:active{
                 scale: .95;
-                background-color:rgba(240, 210, 90, 0.77) ;
+                background-color: rgb(0 192 250);
             }
         }
   
