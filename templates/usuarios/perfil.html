@@ -33,12 +33,13 @@
 
         <div class="col-12 col-lg-4 order-2 order-md-1 margin_small">
           {% if user.is_staff %}
-          <section id="tags">
-            <div class="container">
+          <section id="tags"   >
+            <div class="container  ">
               <div class="row">
                 <div class="col-12 pr-0 pl-0">
-                  <div class="outer_tag mt-4">
-                    <h2 class="main_tag">Ultimos Posteos</h2>
+                  <div class="outer_tag mt-4 ">
+                    <h2 class="main_tag ">Ultimos Posteos</h2>
+                    <div class="inner-box1 panelPerfil">
                     {% for noticia in posteos %}
                     <div class="outer mt-4 display">
                       <div class="imagen-container">
@@ -62,38 +63,38 @@
                     </div>
                     {% endfor %}
                   </div>
+                  </div>
                 </div>
               </div>
             </div>
           </section>
           {% endif %}
 
-          <section id="archieve">
-            <div class="container">
+          <section id="archieve" >
+            <div class="container ">
               <div class="row">
                 <div class="col-12 pr-0 pl-0">
                   <div class="topic_outerbox mt-4">
                     <h2>Ultimos Comentarios</h2>
-                    <div class="inner-box1">
+                    <div class="inner-box1 panelPerfil">
                       <ul style="text-align: left;">
                         {% for comment in comentarios %}
                         <li >
-                          <div class="minimal-post">
-                          <a class="main "
-                            href="{% url 'noticias:detalle' comment.noticia.pk %}"
+                          <div  >
+                          <a class="main heading ml-3 truncate " style="font-size: 13px;"
+                            href="{% url 'noticias:detalle' comment.noticia.pk %}#comentario-{{comment.pk}}"
                             >
                             {{comment.noticia}}
                             
                             </a
-                          </div>
-                          
-                          <br/>
-                          <p class="sub-heading mt-1" id="sub-heading-{{comment.pk}}">
+                          </div> 
+                          <p class="sub-heading " id="sub-heading-{{comment.pk}}">
                             {{comment.contenido}}
                             <br/>
                             {{comment.fecha_creacion}}
                           </p>
                         </li>
+                        <hr/>
                         {% endfor %}
                       </ul>
                     </div>

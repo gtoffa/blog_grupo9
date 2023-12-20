@@ -1,51 +1,53 @@
 {% for comment in comentarios %}
-
-<div class="comment" id="comment{{comment.pk}}">
-  <div class="comment_write">
-    <div class="icon_comment">
-      <img
-        class="written_img rounded"
-        style="height: 50px"
-        src="{{comment.usuario.imagenes.url}}"
-        alt=""
-      />
-      <div class="icon_text">
-        <h1 class="main_written font">{{comment.usuario}}</h1>
-        <p class="date margin_days text-black">{{comment.fecha_creacion}}</p>
-
-        <p class="sub-heading mt-1" id="sub-heading-{{comment.pk}}">
-          {{comment.contenido}}
-        </p>
+<section id="comentario-{{comment.pk}}">
+  <div class="comment" id="comment{{comment.pk}}">
+    <div class="comment_write">
+      <div class="icon_comment  ">
+      <div class=" circle-container">
+        <img
+          class="circle-image" 
+          src="{{comment.usuario.imagenes.url}}"
+          alt=""
+        />
       </div>
-    </div>
-    <div class="container">
-      <div class="row justify-content-end">
-        {% if comment.usuario == user %}
-        <button
-          style="color: gray"
-          onclick="editComment({{comment.pk}})"
-          type="button"
-          class="btn btn btn-link editComment"
-        >
-          Editar
-        </button>
+        <div class="icon_text">
+          <h1 class="main_written font">{{comment.usuario}}</h1>
+          <p class="date margin_days text-black">{{comment.fecha_creacion}}</p>
 
-        {% endif %} {% if comment.usuario == user or user.is_staff %}
-
-        <button
-          type="button"
-          style="color: brown"
-          class="btn btn btn-link confirmDelete"
-          data-toggle="modal"
-          data-target="#confirmModal"
-          data-idcomment="{{comment.pk}}"
-        >
-          Eliminar
-        </button>
-        {% endif %}
+          <p class="sub-heading mt-1" id="sub-heading-{{comment.pk}}">
+            {{comment.contenido}}
+          </p>
+        </div>
       </div>
+      <div class="container">
+        <div class="row justify-content-end">
+          {% if comment.usuario == user %}
+          <button
+            style="color: gray"
+            onclick="editComment({{comment.pk}})"
+            type="button"
+            class="btn btn btn-link editComment"
+          >
+            Editar
+          </button>
+
+          {% endif %} {% if comment.usuario == user or user.is_staff %}
+
+          <button
+            type="button"
+            style="color: brown"
+            class="btn btn btn-link confirmDelete"
+            data-toggle="modal"
+            data-target="#confirmModal"
+            data-idcomment="{{comment.pk}}"
+          >
+            Eliminar
+          </button>
+          {% endif %}
+        </div>
+      </div>
+      <hr />
     </div>
-    <hr />
   </div>
-</div>
+</section>
 {% endfor %}
