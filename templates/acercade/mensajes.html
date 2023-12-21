@@ -1,0 +1,122 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block contenido %} 
+{% include "navbar.html" %}
+
+<div id="page_content" idNoticia="{{noticias.id}}">
+    <!--HEADER IMAGE-->
+    <section
+      id="bg-blog-detail-img" 
+      class="bg-blog-detail-img"
+    >
+      <div class="overlay"></div>
+    </section>
+  
+<section id="search">
+  <div class="container">
+      
+      <div class="row pt-sm-5">
+          <div
+          class="col-sm-12 col-md-12 col-lg-12 pt-sm-4 pt-md-0 pt-lg-0 order-md-2"
+          >
+          <h1> Mensajes enviados </h2>
+
+      {% for mensaje in mensajes %} 
+     
+        <div class="comment" id="comment{{comment.pk}}">
+          <div class="comment_write">
+            <div class="icon_comment  ">
+                <i style=" font-size: xx-large; " class="las la-envelope"></i> 
+              <div class="icon_text">
+                <h1 class="main_written font">{{mensaje.nombre}}</h1>
+                <p class="date margin_days text-black">{{mensaje.fecha_creado}}</p>
+      
+                <p class="sub-heading mt-1" id="sub-heading-{{comment.pk}}">
+                  {{mensaje.mensaje}}
+                </p>
+                <div class="display">
+                    <p class="date text-black">
+                        <i class="fas fa-mobile-alt"></i>
+                        {{mensaje.telefono}}
+                    </p>
+                    <div class="verticle_line margin_1 bg-black"></div>
+                    <span style="margin-left: 18px;">
+                        <i class="fas fa-envelope"></i> 
+                        {{mensaje.correo}}
+                    </span> 
+                 </div>
+               
+              </div>
+            </div>
+            
+            <hr />
+          </div>
+        </div>
+    
+
+      
+      
+     
+        {% endfor %}
+
+        <!--..........PAGINATION..........-->
+        <ul class="pagination mt-10">
+          {% if registros.has_previous %}
+          <li class="page-item">
+            <a
+              class="page-link"
+              href="?page=1"
+              >&laquo; Primero</a
+            >
+          </li>
+          <li class="page-item">
+            <a
+              class="page-link"
+              href="?page={{ registros.previous_page_number }}"
+              ><i class="fas fa-arrow-left"></i
+            ></a>
+          </li>
+          {% endif %} 
+          {% for i in registros.paginator.page_range %} {% if registros.number == i %}
+          <li class="page-item active">
+            <span class="page-link"
+              >{{ i }}
+              <span class="sr-only">(current)</span>
+            </span>
+          </li>
+          {% else %}
+          <li class="page-item">
+            <a
+              class="page-link"
+              href="?page={{ i }}">{{ i }}</a>
+          </li>
+          {% endif %} 
+          {% endfor %} 
+          {% if registros.has_next %}
+          <li class="page-item">
+            <a
+              class="page-link"
+              href="?page={{ registros.next_page_number }}"
+            >
+              <i class="fas fa-arrow-right"></i
+            ></a>
+          </li>
+          <li class="page-item">
+            <a
+              class="page-link"
+              href="?page={{ registros.paginator.num_pages }}"
+              >&raquo; Último</a
+            >
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div> 
+</section>
+</div>
+
+
+
+
+{% endblock contenido %}
