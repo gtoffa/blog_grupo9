@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-xywa_ab^9^8xh^l0t!_qm%luvf4*yzq6gd#e2=7a)xlb^je-25
 AUTH_USER_MODEL = 'usuarios.Usuario'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'apps.usuarios',
     'apps.noticias',
     'apps.home',
-    'apps.contacto',
+    'apps.acercade',
     'ckeditor',
     'django_ajax',
     'crispy_forms',

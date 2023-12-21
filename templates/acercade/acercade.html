@@ -1,0 +1,138 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block contenido %} 
+{% include "navbar.html" %} 
+{% load crispy_forms_tags %}
+<div id="page_content" idNoticia="{{noticias.id}}">
+  <section id="bg-blog-detail-img" style="White" class="bg-blog-detail-img">
+    <div class="overlay"></div>
+  </section>
+
+  <section class="contact-sec" id="contact-sec">
+    <div class="container">
+      <div class="row">
+        <div
+          class="col-12 col-lg-6 contact-description wow slideInLeft"
+          data-wow-delay=".8s"
+        >
+          <div class="contact-detail wow fadeInLeft">
+            <div class="ex-detail">
+              <p class="portfolio-vert text-grey">GRUPO 9</p>
+              <h2 class="heading text-black pl-3">
+                Acerca <br />
+                De
+              </h2>
+            </div>
+            <p
+              class="sub-heading text-grey small-text text-center text-md-left"
+            >
+              ¡Bienvenido a la página web creada por el Grupo 9 del
+              Informatorio año 2023! 
+              <br/>
+              Este proyecto representa nuestro trabajo final,
+              reflejando nuestro compromiso con la excelencia en el diseño y
+              desarrollo web. 
+              <br/>
+              Si deseas ponerte en contacto con
+              nosotros, utiliza nuestro formulario o los números de teléfono
+              proporcionados (solo datos de ejemplo). Estamos ansiosos por
+              colaborar contigo en futuros proyectos. ¡Gracias por visitarnos!
+            </p>
+            <div class="row location-details text-center text-md-left">
+              <div class="col-12 col-md-6 country-1">
+                <h4 class="heading-text text-left text-black">Resistencia</h4>
+                <ul>
+                  <li>
+                    <i class="fas fa-mobile-alt"></i
+                    ><a href="#">+(34) 609 33 17 54</a>
+                  </li>
+                  <li>
+                    <i class="fas fa-envelope"></i
+                    ><a href="#">grupo9@website.com</a>
+                  </li>
+                  <li>
+                    <i class="fas fa-map-marker"></i
+                    ><a href="#">Av. Simpre viva 2023, Resistencia Chaco</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-6 couuntry-1">
+                <h4 class="heading-text text-left text-black">Taco Pozo</h4>
+                <ul>
+                  <li>
+                    <i class="fas fa-mobile-alt"></i
+                    ><a href="#">+(34) 609 33 17 54</a>
+                  </li>
+                  <li>
+                    <i class="fas fa-envelope"></i
+                    ><a href="#">grupo9Taco@website.com</a>
+                  </li>
+                  <li>
+                    <i class="fas fa-map-marker"></i
+                    ><a href="#">Av. Belgrano 1, Taco Pozo Chaco </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-12 col-lg-6 contact-box text-center text-md-left wow slideInRight"
+          data-wow-delay=".8s"
+        >
+          <div class="c-box wow fadeInRight">
+            <h4 class="small-heading">Formulario de contacto</h4>
+            <form
+              class="contact-form"
+              id="contact-form-data"
+              method="post"
+              action="{% url 'acercade:acercade' %}"
+            >
+              {% csrf_token %}
+              <div class="row my-form">
+                <div class="col-12 col-md-6">
+                  {{ form.nombre|as_crispy_field }}
+                </div>
+                <div class="col-12 col-md-6">
+                  {{ form.telefono|as_crispy_field }}
+                </div>
+                <div class="col-12 col-md-12">
+                  {{ form.correo|as_crispy_field }}
+                </div>
+
+                <div class="col-12">{{ form.mensaje|as_crispy_field }}</div>
+                <div class="col-12">
+                  <button class="btn btn-primary contact_btn" type="submit">
+                    ENVIAR
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- START MAP SECTION  -->
+  <section id="map">
+    <div class="row">
+      <div class="col-12">
+        <div class="mapouter">
+          <div class="gmap_canvas">
+            <iframe
+              class="map"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1383.0804306576083!2d-58.99276498790082!3d-27.44880089674808!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94450c62a6f5f70b%3A0xf03ac86511c2cd6d!2sResistencia%2C%20Chaco!5e0!3m2!1ses!2sar!4v1702954231416!5m2!1ses!2sar"
+              width="600"
+              height="450"
+              style="border: 0"
+              allowfullscreen=""
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% endblock contenido %}
+</div>

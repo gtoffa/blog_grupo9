@@ -5,7 +5,7 @@
 
 <div id="page_content">
   
-  {% if comment.usuario == user or user.is_staff %}
+  {% if user.is_staff %}
   <a href="{% url 'noticias:addnoticia' %}" class="btn btn-success boton-flotante">
     Nuevo artículo
 
@@ -18,12 +18,7 @@
     <div class="container">
       <div class="row" style="height: 350px">
         <div class="col-12 align-items-center container" style="top: 40%">
-          <h1
-            class="main-heading text-white"
-            style="font-size: 100px; text-align: center"
-          >
-          Blog
-          </h1>
+           
         </div>
       </div>
     </div>
@@ -52,7 +47,7 @@
                       <i class="las la-sort-alpha-up-alt"></i>
                   {% endif %}
                 </a>
-                <a type="button" style="text-decoration: auto;" class="btn {% if antiguedad %}btn-dark{% else %}btn-outline-dark{% endif %}"   href="?antiguedad={% if antiguedad  == 'asc' %}desc{% else %}asc{% endif %}{% if categoria_select %}&id={{ categoria_select.pk }}{% endif %} {% if buscar %}&buscar={{ buscar }}{% endif %}"  >Fecha  
+                <a type="button" style="text-decoration: auto;" class="btn {% if antiguedad %}btn-dark{% else %}btn-outline-dark{% endif %}"   href="?antiguedad={% if antiguedad  == 'asc' %}desc{% else %}asc{% endif %}{% if categoria_select %}&id={{ categoria_select.pk }}{% endif %}{% if buscar %}&buscar={{ buscar }}{% endif %}"  >Fecha  
                   {% if antiguedad is None %}
                      <i class="las la-sort-amount-up"></i>
                   {% elif antiguedad  == 'asc'  %}
@@ -152,27 +147,7 @@
     </div>
   </section>
 
-  <!--  START FOOTER SECTION  -->
-  <section id="footer" class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center">
-          <ul class="footer_ul">
-            <li class="footer_list"><i class="lab la-facebook-f"></i></li>
-            <li class="footer_list"><i class="lab la-twitter"></i></li>
-            <li class="footer_list"><i class="lab la-google-plus"></i></li>
-            <li class="footer_list"><i class="lab la-linkedin-in"></i></li>
-            <li class="footer_list"><i class="lab la-instagram"></i></li>
-            <li class="footer_list"><i class="las la-envelope"></i></li>
-          </ul>
-          <p class="info footer_text">
-            <i class="far fa-copyright"></i>2023 MegaOne. Made with love by
-            themesindustry
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+  
 </div>
 <script>
   resaltarTexto() 

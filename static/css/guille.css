@@ -1,43 +1,62 @@
 .truncate {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 4; /* Muestra solo 3 líneas */
-    -webkit-box-orient: vertical;
-  }
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
 
-  .minimal-post {
-    max-width: 150px;  
-    overflow: hidden; 
-    text-overflow: ellipsis;   
-    
-  }
-  
-  /* Otras propiedades opcionales para mejorar la apariencia */
-  .minimal-post a {
-      
-    text-decoration: none; /* Elimina la decoración de subrayado del enlace */
-    text-decoration: none; /* E
-  }
-  
-  .minimal-post a:hover {
-    text-decoration: underline; /* Subrayado al pasar el ratón sobre el enlace */
-  }
+.texto-con-tres-lineas {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  font-size: 19px !important;
+  min-height: 87px;
+  max-height: 89px;
+}
+
+.minimal-post {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+/* Otras propiedades opcionales para mejorar la apariencia */
+.minimal-post a {
+
+  text-decoration: none !important;
+  /* Elimina la decoración de subrayado del enlace */
+  text-decoration: none !important;
+  color: #352900 !important;
+}
+
+.minimal-post a:hover {
+  text-decoration: underline;
+  /* Subrayado al pasar el ratón sobre el enlace */
+}
+
 /* Establece las dimensiones del contenedor */
 .imagen-container {
   margin-top: 12px;
   width: 91px !important;
   height: 91px !important;
-  overflow: hidden !important; /* Para recortar cualquier parte de la imagen que exceda las dimensiones del contenedor */
-  display: inline-block !important; /* Para permitir que el contenedor tenga dimensiones específicas y se comporte como un bloque en línea */
+  overflow: hidden !important;
+  /* Para recortar cualquier parte de la imagen que exceda las dimensiones del contenedor */
+  display: inline-block !important;
+  /* Para permitir que el contenedor tenga dimensiones específicas y se comporte como un bloque en línea */
 }
 
- 
+
 
 .imagen-container img {
-  width: 100% !important; /* Ajusta el ancho al 100% del contenedor */
-  height: 100% !important; /* Permite que la altura se ajuste automáticamente para mantener la relación de aspecto */
-  object-fit: cover!important; /* Ajusta el tamaño de la imagen manteniendo su relación de aspecto y cubriendo el contenedor */
- 
+  width: 100% !important;
+  /* Ajusta el ancho al 100% del contenedor */
+  height: 100% !important;
+  /* Permite que la altura se ajuste automáticamente para mantener la relación de aspecto */
+  object-fit: cover !important;
+  /* Ajusta el tamaño de la imagen manteniendo su relación de aspecto y cubriendo el contenedor */
+
 }
 
 
@@ -55,4 +74,95 @@
   border-radius: 5px;
 }
 
- 
+
+@media only screen and (min-width: 600px) {
+  .texto-a-ocultar {
+    display: block;
+  }
+
+  .texto-a-mostrar {
+    display: none;
+  }
+}
+
+
+@media only screen and (max-width: 599px) {
+  .texto-a-ocultar {
+    display: none;
+  }
+
+  .texto-a-mostrar {
+    display: block;
+  }
+}
+
+
+.contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contenedor img {
+  margin: auto;
+}
+
+
+.btn-outline-dark {
+  color: #493701;
+  border-color: #493701;
+}
+
+.btn-outline-dark:hover {
+  color: #ffffff;
+  background-color: #ffae0b;
+  border-color: #493701;
+}
+
+.btn-dark {
+  color: #343a40;
+  background-color: #ffae0b;
+  border-color: #493701;
+}
+
+.btn-dark:hover {
+  color: #ffffff;
+  background-color: #ffae0b;
+  border-color: #493701;
+}
+
+.panelPerfil {
+  overflow-y: scroll;
+  max-height: 400px;
+}
+
+
+@keyframes destello {
+  0% {
+      background-color: transparent;
+  }
+  50% {
+      background-color: rgba(208, 246, 255, 0.534)  ;
+  }
+  100% {
+      background-color: transparent;
+  }
+}
+
+.destello {
+  animation: destello 1s infinite;
+}
+
+
+.circle-container {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.circle-image {
+  width: 100px !important;
+  height: 100px !important;
+  border-radius: 50%;
+}

@@ -55,7 +55,7 @@ function alerta(titulo, icon, text) {
     allowToastClose: true, // Boolean value true or false
     hideAfter: 3000, // false to make it sticky or number representing the miliseconds as time after which toast needs to be hidden
     stack: 5, // false if there should be only one toast at a time or a number representing the maximum number of toasts to be shown at a time
-    position: "bottom-right", // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
+    position: "top-right", // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values
 
     textAlign: "left", // Text alignment i.e. left, right or center
     loader: true, // Whether to show loader or not. True by default
@@ -105,7 +105,7 @@ function editComment(idcomment) {
     .find("#enviar-comentario")
     .after("<hr/>")
     .attr("onclick", "enviarComentario(" + idComentario + ")");
-  
+
   formularioClonado
     .find("#enviar-comentario")
     .attr("style", "margin-top: 20px;")
@@ -222,12 +222,45 @@ $(document).ready(function () {
   });
 });
 
-
 $(document).ready(function () {
-  $(".django-ckeditor-widget").css("width", "100%")
+  $(".django-ckeditor-widget").css("width", "100%");
 });
 
-
-function goBack() { 
-  window.history.back();
+function goBack() {
+  window.history.back(-1);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Verificar si la URL contiene un fragmento
+  if (window.location.hash) {
+    // Esperar un breve momento para asegurar que el DOM esté completamente cargado
+    setTimeout(function () {
+      // Obtener la altura de la barra de navegación
+      var navHeight = document.querySelector("nav").offsetHeight;
+
+      // Obtener el elemento objetivo
+      var targetElement = document.querySelector(window.location.hash);
+
+      // Verificar si el elemento objetivo existe
+      if (targetElement) {
+        // Calcular la posición centrada para el desplazamiento
+        var offsetPosition =
+          targetElement.getBoundingClientRect().top +
+          window.scrollY -
+          (window.innerHeight - targetElement.clientHeight) / 2 -
+          navHeight / 2;
+
+        // Desplazar suavemente a la posición centrada
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+
+        targetElement.classList.add("destello");
+        setTimeout(function () {
+          targetElement.classList.remove("destello");
+        }, 2400); // 1000 milisegundos = 1 segundo
+      }
+    }, 500); // Ajusta el tiempo de espera según sea necesario
+  }
+});

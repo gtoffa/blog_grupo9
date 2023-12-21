@@ -1,0 +1,108 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Montserrat' , sans-serif;
+}
+
+h1{
+    font-size: 2.5rem;
+    color: rgb(245, 245, 245);
+    margin-bottom: 1.2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+h2{
+    font-size: 1.5rem;
+    color: rgb(255, 255, 255);
+    margin-bottom: 1.2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+ 
+.Carta_logueo{
+    width: 420px;
+    padding: 2rem 1rem;
+    margin: 50px auto;
+    background-color: rgba(255, 255, 255, 0.55);
+    border-radius: 40px;
+    text-align: center;
+    border: lpx solid #ddd ;
+    box-shadow: 0 10px 50px -30px black;;
+    overflow: hidden;
+    backdrop-filter: blur(10px); 
+    .form-element {
+        width: 100%;
+        border: none;
+        background-color: #f1f1f1;
+        padding: 20px 30px;
+        font-size: 18px;
+        border-radius: 50px;
+        transition: box-shadow .2s;
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px grey;
+        }
+
+    }
+
+    
+
+    
+
+    form {
+        margin-top: 3rem;
+
+        &>* {
+            margin-top: 1rem;
+        }
+
+        button {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            padding: 10px 0;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            width: 90%;
+            color: rgb(0, 0, 0);
+            cursor: pointer;
+            background:rgba(255, 255, 255, 0.77);
+            transition: all .4s;
+
+            &:hover{
+                background-color: rgb(0 192 250);
+                box-shadow: 0 0 10px rgb(150, 200, 220);
+                color: rgb(0, 0, 0);
+            }
+
+            &:active{
+                scale: .95;
+                background-color: rgb(0 192 250);
+            }
+        }
+  
+
+    }
+}
+
+.bi{
+    font-size: 20px;
+    position: relative;
+    left: 170px;
+    top: -62px;
+    color: grey;
+}
+
+
+.bg-blog-detail-img {
+    background-image: url(../img/slider5.jpg);
+ 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 110vh;
+    padding: 1.5rem;
+}

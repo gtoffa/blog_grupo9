@@ -1,0 +1,120 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block contenido %} 
+{% include "navbar.html" %}
+ {% load crispy_forms_tags %}
+<div id="page_content">
+  <section
+    id="bg-blog-detail-img"
+    style="background-image: url({{ form.instance.imagenes.url }});"
+    class="bg-blog-detail-img"
+  >
+    <div class="overlay"></div>
+  </section>
+  <section id="search">
+    <div class="container">
+      <div class="row pt-lg-5">
+        <div class="col-sm-12 col-ms-8 col-lg-8">
+          <h2>Editar Perfil</h2>
+          <hr />
+          <form
+            action=""
+            class="post-form"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            {% csrf_token %} {{ form.media }} {% crispy form %}
+            <button class="btn btn-success boton-flotante" type="submit">
+              Guardar cambios
+              <i class="las la-save"></i>
+            </button>
+          </form>
+        </div>
+
+        <div class="col-12 col-lg-4 order-2 order-md-1 margin_small">
+          {% if user.is_staff %}
+          <section id="tags"   >
+            <div class="container  ">
+              <div class="row">
+                <div class="col-12 pr-0 pl-0">
+                  <div class="outer_tag mt-4 ">
+                    <h2 class="main_tag ">Ultimos Posteos</h2>
+                    <div class="inner-box1 panelPerfil">
+                    {% for noticia in posteos %}
+                    <div class="outer mt-4 display">
+                      <div class="imagen-container">
+                        <a href="{% url 'noticias:detalle' noticia.pk %}"
+                          ><img
+                            class="imagen-container-img"
+                            src="{{noticia.imagenes.url}}"
+                            alt="{{noticia.titulo}}"
+                        /></a>
+                      </div>
+                      <div class="text_post minimal-post">
+                        <a
+                          href="{% url 'noticias:detalle' noticia.pk %}"
+                          class="main"
+                          title="{{noticia.titulo}}"
+                          >{{noticia.titulo | slice:22 }}</a
+                        >
+                        <p class="date">{{noticia.fecha_publicacion}}</p>
+                        <span>{{noticia.autor}}</span>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          {% endif %}
+
+          <section id="archieve" >
+            <div class="container ">
+              <div class="row">
+                <div class="col-12 pr-0 pl-0">
+                  <div class="topic_outerbox mt-4">
+                    <h2>Ultimos Comentarios</h2>
+                    <div class="inner-box1 panelPerfil">
+                      <ul style="text-align: left;">
+                        {% for comment in comentarios %}
+                        <li >
+                          <div  >
+                          <a class="main heading ml-3 truncate " style="font-size: 13px;"
+                            href="{% url 'noticias:detalle' comment.noticia.pk %}#comentario-{{comment.pk}}"
+                            >
+                            {{comment.noticia}}
+                            
+                            </a
+                          </div> 
+                          <p class="sub-heading " id="sub-heading-{{comment.pk}}">
+                            {{comment.contenido}}
+                            <br/>
+                            {{comment.fecha_creacion}}
+                          </p>
+                        </li>
+                        <hr/>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<script
+  type="text/javascript"
+  src="{% static 'ckeditor/ckeditor-init.js' %}"
+></script>
+<script
+  type="text/javascript"
+  src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"
+></script>
+
+{% endblock contenido %}

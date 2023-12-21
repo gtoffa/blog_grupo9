@@ -48,7 +48,8 @@
 
           {% include "./formcomentario.html" %} {% else %}
           <h4 class="comment_text text-black mt-6 mb-5">
-            Registrarte para escribir un comentario
+ 
+            <a class="comment_text text-black mt-6 mb-5" style="font-size: 25px;color: cornflowerblue;" href="{% url 'usuarios:login' %}">Iniciar sesion para escribir un comentario</a>
           </h4>
           {% endif %}
         </div>
@@ -56,35 +57,14 @@
       </div>
     </div>
   </section>
-  {% if comment.usuario == user or user.is_staff %}
+  {% if   user.is_staff %}
   <a href="{% url 'noticias:edit_noticia' pk=noticias.pk %}" class="btn btn-info boton-flotante">
     Editar artículo
 
     <i class="las la-pen"></i>
   </a>
   {% endif %}
-  <!--  START FOOTER SECTION  -->
-  <section id="footer" class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-12 text-center">
-          <ul class="footer_ul">
-            <li class="footer_list"><i class="lab la-facebook-f"></i></li>
-            <li class="footer_list"><i class="lab la-twitter"></i></li>
-            <li class="footer_list"><i class="lab la-google-plus"></i></li>
-            <li class="footer_list"><i class="lab la-linkedin-in"></i></li>
-            <li class="footer_list"><i class="lab la-instagram"></i></li>
-            <li class="footer_list"><i class="las la-envelope"></i></li>
-          </ul>
-          <p class="info footer_text">
-            <i class="far fa-copyright"></i>2023 MegaOne. Made with love by
-            themesindustry
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
+ 
 
 <!-- Modal de confirmación -->
 <div

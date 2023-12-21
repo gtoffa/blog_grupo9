@@ -6,15 +6,15 @@
     class="navbar navbar-expand-lg navbar-light rounded-bar sidemenu-nav"
   >
     <div class="logo width-logo1">
-      <a href="index-blog.html"
+      <a href="/"
         ><img src="{% static 'img/logo-white.png'%}" alt="Logo Img"
       /></a>
     </div>
-    <div class="menu-btn ml-auto">
+    <a   class="sidemenu_btn menu-btn-home" id="sidemenu_toggle">
       <span></span>
       <span></span>
       <span></span>
-    </div>
+    </a>
   </nav>
 
   {% include "menu.html" %}
@@ -37,6 +37,7 @@
   </div>
 </section>
 
+<div class="areacontenido">
 <section id="about" class="about">
   <div class="container">
     <div class="row">
@@ -51,7 +52,7 @@
       <div class="col-12 col-md-6">
         <p class="sub-heading text-grey">
           <br />
-          En MiMundoViajando, te sumergirás en relatos llenos de color y
+          En Mi Mundo Viajando, te sumergirás en relatos llenos de color y
           emoción, descubriendo secretos locales, joyas ocultas y consejos
           expertos para maximizar tu experiencia viajera. Desde playas
           paradisíacas hasta ciudades vibrantes, nuestro objetivo es inspirarte
@@ -78,7 +79,7 @@
               <div class="cbp-l-caption-body">
                 <a
                   href="{% url 'noticias:detalle' noticia.pk %}"
-                  class="btn blog-btn  cbp-l-caption-buttonLeft"
+                  class="btn blog-btn cbp-l-caption-buttonLeft"
                   >Leer Más</a
                 >
               </div>
@@ -86,16 +87,14 @@
           </div>
         </div>
         <div class="portfolio-text">
-          <p class="portfolio-vert text-grey">{{noticia.categoria_noticia}}</p>
+         
           <a class="text-black" href="{% url 'noticias:detalle' noticia.pk %}"
-            ><h2 class="heading ml-3">{{noticia.titulo}}</h2></a
+            ><h2 class="heading ml-3 texto-con-tres-lineas">{{noticia.titulo}}</h2></a
           >
           <p class="date text-grey">{{noticia.fecha_publicacion}}</p>
 
           <div class="horizontal-line"></div>
-          <p class="sub-heading text-grey mt-3 truncate">
-            {{noticia.resumen}}
-          </p>
+          <p class="sub-heading text-grey mt-3 truncate">{{noticia.resumen}}</p>
         </div>
       </div>
       {% endfor %}
@@ -128,7 +127,7 @@
         </div>
         <div class="item">
           <p class="heading-large text-white">
-            "Inspiración constante y guía infalible: MiMundoViajando ha elevado
+            "Inspiración constante y guía infalible: Mi Mundo Viajando ha elevado
             mis viajes a nuevas alturas. Cada artículo es una ventana a destinos
             asombrosos, proporcionando insights valiosos para explorar el mundo
             de manera auténtica."
@@ -142,7 +141,7 @@
         </div>
         <div class="item">
           <p class="heading-large text-white">
-            "MiMundoViajando no solo es un blog; es una comunidad apasionada.
+            "Mi Mundo Viajando no solo es un blog; es una comunidad apasionada.
             Conectándome con otros amantes de los viajes, he creado recuerdos
             inolvidables gracias a las recomendaciones compartidas. Este blog es
             mi compañero inseparable en cada travesía."
@@ -159,25 +158,6 @@
   </div>
 </section>
 
-<section id="footer" class="footer">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center">
-        <ul class="footer_ul">
-          <li class="footer_list"><i class="lab la-facebook-f"></i></li>
-          <li class="footer_list"><i class="lab la-twitter"></i></li>
-          <li class="footer_list"><i class="lab la-google-plus"></i></li>
-          <li class="footer_list"><i class="lab la-linkedin-in"></i></li>
-          <li class="footer_list"><i class="lab la-instagram"></i></li>
-          <li class="footer_list"><i class="las la-envelope"></i></li>
-        </ul>
-        <p class="info footer_text">
-          <i class="far fa-copyright"></i>2023 Mi Mundo Viajero. Hecho con amor
-          por viajeros
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
 
+</div>
 {% endblock contenido %}

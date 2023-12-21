@@ -7,7 +7,7 @@ jQuery(window).on("load", function () {
         Loading Timeout
      ====================================== */
     $(".loader-area").fadeOut(800);
-
+    $('.side-menu').removeClass('hidden');
 });
 
 jQuery(function ($) {
@@ -61,6 +61,14 @@ jQuery(function ($) {
         $('.outer-wrapper').addClass('start-anm1');
 
     });
+    $('.menu-btn-home').on("click", function () {
+        $('.outer-wrapper').removeClass('end-anm1');
+        $('.outer-wrapper').addClass('inner-wrapper');
+        $('.main-content').addClass('main-content-hide');
+        $('body').css({overflow:'hidden'});
+        $('.outer-wrapper').addClass('start-anm1');
+
+    });
     $('.close-outerwindow').on("click", function () {
         $('.outer-wrapper').removeClass('start-anm1');
         $('.outer-wrapper').addClass('end-anm1');
@@ -82,6 +90,10 @@ jQuery(function ($) {
         center:false,
         nav:false,
         dots:true,
+        autoplay: true,
+        autoPlaySpeed: 2000,
+        autoPlayTimeout: 5000,
+        autoplayHoverPause: true,
         responsive:{
             0:{
                 items:1
@@ -195,12 +207,53 @@ jQuery(function ($) {
 })(jQuery, window, document);
 
 
+if ($("#sidemenu_toggle").length) {
+    $("#sidemenu_toggle").on("click", function () {
+        $(".pushwrap").toggleClass("active");
+        $(".side-menu").addClass("side-menu-active"), $("#close_side_menu").fadeIn(700)
+    }), $("#close_side_menu").on("click", function () {
+        $(".side-menu").removeClass("side-menu-active"), $(this).fadeOut(200), $(".pushwrap").removeClass("active")
+    }), $(".side-nav .navbar-nav .nav-link").on("click", function () {
+        $(".side-menu").removeClass("side-menu-active"), $("#close_side_menu").fadeOut(200), $(".pushwrap").removeClass("active")
+    }), $("#btn_sideNavClose").on("click", function () {
+        $(".side-menu").removeClass("side-menu-active"), $("#close_side_menu").fadeOut(200), $(".pushwrap").removeClass("active")
+    });
+}
+
+
+/* ===================================
+     WOW Animation
+ ====================================== */
+ if ($(window).width() > 991) {
+    var wow = new WOW({
+        boxClass: 'wow',
+        animateClass: 'animated',
+        offset: 0,
+        mobile: false,
+        live: true
+    });
+    new WOW().init();
+}
 
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    var spans = document.querySelectorAll('.menu-btn-home span');
 
+    function cambiarColorConScroll() {
+        var scrollPosition = window.scrollY;
 
+        if (scrollPosition > 0) {
+            spans.forEach(function(span) {
+                span.style.backgroundColor = 'black';
+            });
+        } else {
+            spans.forEach(function(span) {
+                span.style.backgroundColor = 'white';
+            });
+        }
+    }
+    window.addEventListener('scroll', cambiarColorConScroll);
 
-
-
-
+    cambiarColorConScroll();
+});

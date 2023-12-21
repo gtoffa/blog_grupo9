@@ -1,0 +1,77 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Montserrat' , sans-serif;
+}
+ 
+
+h1{
+    font-size: 2.5rem;
+    color: rgb(245, 245, 245);
+    margin-bottom: 1.2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.formulario-registro{
+    width: 450px;
+    padding: 2rem 1rem;
+    margin: 30px auto;
+    background-color: rgba(255, 255, 255, 0.55);
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 10px 50px -30px black;;
+    overflow: hidden;
+    backdrop-filter: blur(10px); 
+}
+
+form input{
+    width: 100%;
+    border: none;
+    background-color: #e4e4e4;
+    padding: 20px 30px;
+    font-size: 18px;
+    border-radius: 50px;
+    transition: box-shadow .2s;
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px grey;
+    }
+}
+
+button {
+    font-size: 1rem;
+    margin-top: 1.8rem;
+    padding: 10px 0;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    width: 100%;
+    color: #1d1c1c;
+    cursor: pointer;
+    background:rgba(255, 255, 255, 0.77);
+    transition: all .4s;
+
+    &:hover{
+        background-color: rgb(0 192 250);
+        box-shadow: 0 0 10px rgb(150, 200, 220);
+        color: rgb(0, 0, 0);
+    }
+
+    &:active{
+        scale: .95;
+        background-color: rgb(0 192 250);
+    }
+}
+
+
+.bg-blog-detail-img {
+    background-image: url(../img/slider5.jpg);
+ 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 110vh;
+    padding: 1.5rem;
+}
