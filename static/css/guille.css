@@ -166,3 +166,9 @@
   height: 100px !important;
   border-radius: 50%;
 }
+
+.circle-image-user {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50%;
+}
