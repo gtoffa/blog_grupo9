@@ -10,6 +10,12 @@ Este repositorio corresponde al trabajo final desarrollado para el Informatorio 
 - Gonzalo Exequiel Flores
 - Guillermo Toffaletti
 
+  ## Usuarios pythonanywhere
+| Rol    | Usuario   | Contraseña          |
+|--------|-----------|---------------------|
+| Admin  | admin     | salioelsol          |
+| Miembro| miembro   | caelsolentubalcon   |
+
 # Especificaciones y Restricciones
 
 ## Perfiles de Usuario:
