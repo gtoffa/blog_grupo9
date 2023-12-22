@@ -3,6 +3,13 @@
 
 Este repositorio corresponde al trabajo final desarrollado para el Informatorio 2da Etapa. El proyecto consiste en una aplicación web tipo BLOG con funcionalidades específicas y perfiles de usuario. A continuación, se detallan los requisitos, especificaciones y restricciones del proyecto.
 
+## Integrantes del Grupo
+
+- Matías Efrén Nedel
+- Martín Luciano Vallejos
+- Gonzalo Exequiel Flores
+- Guillermo Toffaletti
+
 # Especificaciones y Restricciones
 
 ## Perfiles de Usuario:
