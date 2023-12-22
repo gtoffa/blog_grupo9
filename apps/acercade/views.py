@@ -3,6 +3,7 @@ from .models import InformacionContacto
 # Asegúrate de tener un archivo forms.py en tu aplicación
 from .forms import InformacionContactoForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.decorators import login_required
 
 
 def formulario_contacto(request):
@@ -23,7 +24,10 @@ def exito(request):
     return render(request, 'acercade/exito.html')
 
 
+@login_required
 def mensajes(request):
+    if request.user.is_staff == False:
+        return redirect('home:inicio')
     contexto = {}
     n = InformacionContacto.objects.all().order_by('-fecha_creado')
     page = request.GET.get('page', 1)
@@ -51,9 +55,8 @@ def mensajes(request):
         'mensajes': n,
         'registros': registros_pagina_actual,
         'total_registros': total_registros,
-        'total_paginas': total_paginas,   
-        'page': page,  
+        'total_paginas': total_paginas,
+        'page': page,
 
     }
-
-    return render(request, 'acercade/mensajes.html',contexto)
+    return render(request, 'acercade/mensajes.html', contexto)

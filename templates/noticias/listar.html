@@ -81,6 +81,7 @@
               href="{% url 'noticias:detalle' noticia.pk %}"
             >
               <h2>{{noticia.titulo}}</h2>
+              
             </a>
             <div class="display">
               <p class="date text-black">{{noticia.fecha_publicacion}}</p>
@@ -88,6 +89,8 @@
               <span>{{noticia.autor}}</span>
               <div class="verticle_line margin_1 bg-black"></div>
               <span>{{noticia.categoria_noticia}}</span>
+              <div class="verticle_line margin_1 bg-black"></div>
+              <span><i class="las la-eye"></i> {{noticia.cant_vistas}} visitas</span>
             </div>
             <p class="sub-heading text-grey">
                 {{noticia.resumen}}

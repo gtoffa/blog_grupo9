@@ -20,6 +20,12 @@
             <h1 class="pt-3 font-weight-bold blog_detail-heading text-black">
               {{noticias.titulo}}
             </h1>
+            <div class="portfolio-text">
+              <p class="portfolio-vert text-grey">{{noticias.fecha_publicacion}} | {{noticias.categoria_noticia}} | <i class="las la-eye"></i> {{noticias.cant_vistas}} visitas</p>
+              
+              <div class="horizontal-line"></div>
+              
+          </p></div>
             <p class="sub-heading pt-0 text-grey">
               {{noticias.contenido|safe}}
             </p>
@@ -30,7 +36,7 @@
           <div class="written">
             <div class="written_outerbox mt-5 display">
               <img
-                class="written_img"
+                class="written_img circle-image"
                 src="{{noticias.autor.imagenes.url}}"
                 alt=""
               />

@@ -14,19 +14,22 @@ from django_ajax.decorators import ajax
 from django.views.generic import TemplateView
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
- 
+
 from django.contrib.admin.models import LogEntry
 from django.contrib.contenttypes.models import ContentType
- 
+
 
 # Create your views here.
 # Creamos un objeto local enhebrado para almacenar el usuario actual
 thread_local = threading.local()
 
+
 def get_current_user():
     return getattr(thread_local, 'user', None)
 
 # Definir una función middleware para establecer el usuario actual en cada solicitud
+
+
 class CurrentUserMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
@@ -35,6 +38,7 @@ class CurrentUserMiddleware:
         thread_local.user = request.user
         response = self.get_response(request)
         return response
+
 
 def ListarNoticias(request):
     contexto = {}
@@ -86,7 +90,7 @@ def ListarNoticias(request):
             n = n.order_by('-titulo')
 
     # Crear un objeto Paginator
-    registros_por_pagina = 3
+    registros_por_pagina = 5
     paginator = Paginator(n, registros_por_pagina)
     # Obtener el número de página desde la solicitud GET
 
@@ -144,7 +148,7 @@ def DetalleNoticia(request, pk):
     id_categoria = request.GET.get("id", None)
     archivo = request.GET.get("archivo", None)
     redirect_url = reverse('noticias:listar')
-    
+
     if id_categoria is not None:
         redirect_url += f'?id={id_categoria}'
         return redirect(redirect_url)
@@ -210,7 +214,7 @@ def cargar_comentarios(request, noticia_id):
                 noticia=noticia, usuario=usuario, contenido=comentario_contenido)
         else:
             comentario = get_object_or_404(Comentario, id=id_comentario)
-            comentario.contenido=comentario_contenido
+            comentario.contenido = comentario_contenido
             comentario.save()
 
         c = noticia.comentarios.all()
@@ -239,7 +243,7 @@ def eliminar_comentarios(request, id_comentario):
         if comentario.usuario == request.user or usuario.is_staff:
             comentario.delete()
 
-        noticia = get_object_or_404(Noticia, id=id)  
+        noticia = get_object_or_404(Noticia, id=id)
         c = noticia.comentarios.all()
         contexto = {
             'comentarios': c,
@@ -255,31 +259,35 @@ def eliminar_comentarios(request, id_comentario):
 
 @login_required
 def AddNoticia(request):
+    if request.user.is_staff == False:
+        return redirect('home:inicio')
     if request.method == 'POST':
-        form = NoticiaForm(request.POST or None, request.FILES) ##Request files es para las imagenes
+        # Request files es para las imagenes
+        form = NoticiaForm(request.POST or None, request.FILES)
 
         if form.is_valid():
             noticia = form.save(commit=False)
             noticia.autor = request.user
             form.save()
             redirect_url = reverse('noticias:listar')
-            return redirect(redirect_url) 
+            return redirect(redirect_url)
     else:
         form = NoticiaForm()
-    
-    return render (request, 'noticias/addNoticia.html', {'form':form})
+
+    return render(request, 'noticias/addNoticia.html', {'form': form})
+
 
 @login_required
 def EditarNoticia(request, pk):
     noticia = get_object_or_404(Noticia, pk=pk)
     content_type = ContentType.objects.get_for_model(noticia)
     # Obtener las entradas de historial de cambios para tu modelo
-    history_entries = LogEntry.objects.filter(content_type=content_type, object_id = pk).order_by('-action_time')[:10]
-
+    history_entries = LogEntry.objects.filter(
+        content_type=content_type, object_id=pk).order_by('-action_time')[:10]
 
     # Solo el autor puede editar la noticia
     if noticia.autor != request.user:
-        return HttpResponseForbidden("No tenes permiso para editar esta noticia.")
+       return redirect('home:inicio')
 
     if request.method == 'POST':
         form = NoticiaForm(request.POST, request.FILES, instance=noticia)
@@ -291,7 +299,7 @@ def EditarNoticia(request, pk):
 
     context = {
         'form': form,
-        'history':history_entries,
+        'history': history_entries,
         'user': request.user
     }
     return render(request, 'noticias/editar.html', context)
