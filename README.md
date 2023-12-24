@@ -10,6 +10,10 @@ Este repositorio corresponde al trabajo final desarrollado para el Informatorio 
 - Gonzalo Exequiel Flores
 - Guillermo Toffaletti
 
+## Ramas
+- main -> Produccion
+- dev -> Desarollo
+
   ## Usuarios pythonanywhere
 | Rol    | Usuario   | Contraseña          |
 |--------|-----------|---------------------|
