@@ -3,6 +3,9 @@
 
 Este repositorio corresponde al trabajo final desarrollado para el Informatorio 2da Etapa. El proyecto consiste en una aplicación web tipo BLOG con funcionalidades específicas y perfiles de usuario. A continuación, se detallan los requisitos, especificaciones y restricciones del proyecto.
 
+Para ver el resultado
+https://gtoffa.pythonanywhere.com/
+
 ## Integrantes del Grupo
 
 - Matías Efrén Nedel
